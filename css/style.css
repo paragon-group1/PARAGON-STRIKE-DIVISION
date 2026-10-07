@@ -1,1 +1,1892 @@
+/* =========================================================
+   PARAGON STRIKE DIVISION
+   MAIN STYLE
+========================================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+    --black: #030405;
+    --dark: #07090a;
+    --panel: #0b0e10;
+    --panel-light: #111518;
+
+    --white: #f2f4f3;
+    --gray: #9ba3a6;
+    --gray-dark: #50575a;
+
+    --line: rgba(255,255,255,.10);
+    --line-light: rgba(255,255,255,.18);
+
+    --green: #8fa99a;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    background: var(--black);
+
+    color: var(--white);
+
+    font-family: 'Inter', sans-serif;
+
+    overflow-x: hidden;
+
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background-grid {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 55px 55px;
+
+    opacity: .45;
+
+}
+
+
+.scanlines {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 50;
+
+    background:
+
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 3px,
+            rgba(255,255,255,.015) 4px
+        );
+
+}
+
+
+.noise {
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: .04;
+
+    z-index: 51;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+
+}
+
+
+/* =========================================================
+   ACCESS PAGE
+========================================================= */
+
+.access-page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.access-header {
+
+    height: 80px;
+
+    padding: 0 5vw;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.brand-small {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+}
+
+
+.brand-mark {
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid var(--line-light);
+
+    display: grid;
+
+    place-items: center;
+
+    font-family: Orbitron;
+
+    font-weight: 700;
+
+}
+
+
+.brand-small strong {
+
+    display: block;
+
+    font-family: Orbitron;
+
+    letter-spacing: 3px;
+
+}
+
+
+.brand-small small {
+
+    display: block;
+
+    color: var(--gray);
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-top: 3px;
+
+}
+
+
+.system-code {
+
+    color: var(--gray);
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.access-main {
+
+    flex: 1;
+
+    display: grid;
+
+    place-items: center;
+
+    padding: 60px 20px;
+
+}
+
+
+.access-container {
+
+    width: min(1000px, 100%);
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 70px;
+
+    align-items: center;
+
+}
+
+
+.access-brand {
+
+    text-align: left;
+
+}
+
+
+.access-mark {
+
+    width: 110px;
+    height: 110px;
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    display: grid;
+
+    place-items: center;
+
+    font-family: Orbitron;
+
+    font-size: 50px;
+
+    font-weight: 700;
+
+    margin-bottom: 35px;
+
+    position: relative;
+
+}
+
+
+.access-mark::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 8px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+}
+
+
+.access-brand h1 {
+
+    font-family: Orbitron;
+
+    font-size: clamp(40px, 6vw, 76px);
+
+    letter-spacing: 8px;
+
+    line-height: 1;
+
+}
+
+
+.access-brand h2 {
+
+    margin-top: 10px;
+
+    color: var(--gray);
+
+    font-family: Orbitron;
+
+    font-size: 15px;
+
+    letter-spacing: 8px;
+
+    font-weight: 400;
+
+}
+
+
+.access-line {
+
+    width: 170px;
+
+    height: 1px;
+
+    background: var(--white);
+
+    margin: 30px 0 20px;
+
+}
+
+
+.access-brand p {
+
+    color: var(--gray);
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+}
+
+
+/* =========================================================
+   SYSTEM PANEL
+========================================================= */
+
+.system-panel {
+
+    border: 1px solid var(--line-light);
+
+    background: rgba(8,10,11,.92);
+
+    padding: 30px;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.5);
+
+}
+
+
+.panel-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: var(--gray);
+
+    font-family: Orbitron;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.panel-header span:last-child {
+
+    color: var(--white);
+
+}
+
+
+.progress-container {
+
+    height: 3px;
+
+    background: #1a1d1e;
+
+    margin: 25px 0;
+
+}
+
+
+.progress-bar {
+
+    width: 0%;
+
+    height: 100%;
+
+    background: var(--white);
+
+    transition: width .08s linear;
+
+}
+
+
+.boot-status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color: var(--gray);
+
+}
+
+
+.status-dot {
+
+    width: 7px;
+    height: 7px;
+
+    background: var(--gray);
+
+    border-radius: 50%;
+
+}
+
+
+.terminal-data {
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 10px;
+
+    margin-top: 30px;
+
+}
+
+
+.terminal-data div {
+
+    border: 1px solid var(--line);
+
+    padding: 13px;
+
+}
+
+
+.terminal-data span {
+
+    display: block;
+
+    color: var(--gray);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.terminal-data strong {
+
+    display: block;
+
+    margin-top: 7px;
+
+    font-family: Orbitron;
+
+    font-size: 10px;
+
+}
+
+
+.enter-button {
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 17px;
+
+    background: transparent;
+
+    color: var(--white);
+
+    border: 1px solid var(--line-light);
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+
+.enter-button span {
+
+    display: block;
+
+    font-family: Orbitron;
+
+    letter-spacing: 4px;
+
+    font-size: 12px;
+
+}
+
+
+.enter-button small {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--gray);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.enter-button:hover:not(:disabled) {
+
+    background: var(--white);
+
+    color: var(--black);
+
+}
+
+
+.enter-button:disabled {
+
+    opacity: .25;
+
+    cursor: not-allowed;
+
+}
+
+
+.access-footer {
+
+    height: 55px;
+
+    padding: 0 5vw;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    color: var(--gray-dark);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    border-top: 1px solid var(--line);
+
+}
+
+
+/* =========================================================
+   COMMAND PAGE
+========================================================= */
+
+.command-page {
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            #121719 0%,
+            var(--black) 50%
+        );
+
+}
+
+
+.command-header {
+
+    min-height: 82px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+
+    align-items: center;
+
+    padding: 0 4vw;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.command-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.command-brand strong {
+
+    display: block;
+
+    font-family: Orbitron;
+
+    letter-spacing: 3px;
+
+}
+
+
+.command-brand span {
+
+    display: block;
+
+    color: var(--gray);
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    margin-top: 4px;
+
+}
+
+
+.command-center {
+
+    text-align: center;
+
+}
+
+
+.command-center span,
+.command-center strong {
+
+    display: block;
+
+}
+
+
+.command-center span {
+
+    color: var(--gray);
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.command-center strong {
+
+    font-family: Orbitron;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    margin-top: 5px;
+
+}
+
+
+.system-status {
+
+    justify-self: end;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.online-dot {
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #a7bdb0;
+
+    box-shadow: 0 0 12px rgba(167,189,176,.5);
+
+}
+
+
+.system-status strong {
+
+    display: block;
+
+    font-family: Orbitron;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.system-status small {
+
+    display: block;
+
+    color: var(--gray);
+
+    font-size: 8px;
+
+    margin-top: 4px;
+
+}
+
+
+.command-nav {
+
+    display: flex;
+
+    gap: 2px;
+
+    padding: 0 4vw;
+
+    border-bottom: 1px solid var(--line);
+
+    overflow-x: auto;
+
+}
+
+
+.nav-button {
+
+    padding: 17px 20px;
+
+    background: transparent;
+
+    border: 0;
+
+    border-bottom: 2px solid transparent;
+
+    color: var(--gray);
+
+    font-family: Orbitron;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    white-space: nowrap;
+
+}
+
+
+.nav-button.active {
+
+    color: var(--white);
+
+    border-bottom-color: var(--white);
+
+}
+
+
+.command-main {
+
+    width: min(1400px, 92%);
+
+    margin: auto;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.command-hero {
+
+    min-height: 420px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.section-code {
+
+    color: var(--gray);
+
+    font-family: Orbitron;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+}
+
+
+.command-hero h1 {
+
+    margin-top: 18px;
+
+    font-family: Orbitron;
+
+    font-size: clamp(35px,5vw,70px);
+
+    line-height: 1.05;
+
+    letter-spacing: 3px;
+
+}
+
+
+.command-hero h1 span {
+
+    color: var(--gray);
+
+}
+
+
+.command-hero p {
+
+    max-width: 500px;
+
+    margin-top: 25px;
+
+    color: var(--gray);
+
+    line-height: 1.8;
+
+    font-size: 13px;
+
+}
+
+
+.hero-system {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+}
+
+
+.system-circle {
+
+    width: 140px;
+    height: 140px;
+
+    border: 1px solid var(--line-light);
+
+    border-radius: 50%;
+
+    display: grid;
+
+    place-items: center;
+
+    position: relative;
+
+}
+
+
+.system-circle::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 12px;
+
+    border: 1px dashed var(--line-light);
+
+    border-radius: 50%;
+
+}
+
+
+.system-circle span {
+
+    font-family: Orbitron;
+
+    font-size: 38px;
+
+    z-index: 1;
+
+}
+
+
+.hero-system small,
+.hero-system strong,
+.hero-system > div:last-child span {
+
+    display: block;
+
+}
+
+
+.hero-system small {
+
+    color: var(--gray);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.hero-system strong {
+
+    font-family: Orbitron;
+
+    margin: 8px 0;
+
+    font-size: 11px;
+
+}
+
+
+.hero-system > div:last-child span {
+
+    color: var(--gray);
+
+    font-size: 8px;
+
+}
+
+
+/* =========================================================
+   OVERVIEW
+========================================================= */
+
+.overview-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4,1fr);
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.overview-card {
+
+    min-height: 180px;
+
+    padding: 25px;
+
+    border-right: 1px solid var(--line);
+
+    position: relative;
+
+}
+
+
+.overview-card:last-child {
+
+    border-right: 0;
+
+}
+
+
+.card-number {
+
+    color: var(--gray-dark);
+
+    font-family: Orbitron;
+
+    font-size: 9px;
+
+}
+
+
+.overview-card small {
+
+    display: block;
+
+    margin-top: 25px;
+
+    color: var(--gray);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.overview-card strong {
+
+    display: block;
+
+    margin-top: 10px;
+
+    font-family: Orbitron;
+
+    font-size: 28px;
+
+}
+
+
+.card-status {
+
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--gray-dark);
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* =========================================================
+   OPERATORS
+========================================================= */
+
+.operators-section {
+
+    padding: 80px 0;
+
+}
+
+
+.section-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: end;
+
+    margin-bottom: 35px;
+
+}
+
+
+.section-heading h2 {
+
+    margin-top: 10px;
+
+    font-family: Orbitron;
+
+    font-size: clamp(20px,3vw,32px);
+
+    letter-spacing: 2px;
+
+}
+
+
+.operator-counter {
+
+    color: var(--gray);
+
+    font-family: Orbitron;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.operators-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 12px;
+
+}
+
+
+.operator-card {
+
+    background: rgba(10,13,14,.85);
+
+    border: 1px solid var(--line);
+
+    padding: 24px;
+
+    min-height: 250px;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+.operator-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    height: 2px;
+
+    background: transparent;
+
+}
+
+
+.operator-card:hover {
+
+    border-color: var(--line-light);
+
+    transform: translateY(-4px);
+
+}
+
+
+.operator-card:hover::before {
+
+    background: var(--white);
+
+}
+
+
+.operator-number {
+
+    color: var(--gray-dark);
+
+    font-family: Orbitron;
+
+    font-size: 9px;
+
+}
+
+
+.operator-card h3 {
+
+    margin-top: 35px;
+
+    font-family: Orbitron;
+
+    font-size: 22px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.operator-real-name {
+
+    color: var(--gray);
+
+    margin-top: 5px;
+
+    font-size: 11px;
+
+}
+
+
+.operator-specialty {
+
+    margin-top: 25px;
+
+    color: var(--gray);
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.operator-bottom {
+
+    position: absolute;
+
+    bottom: 22px;
+
+    left: 24px;
+    right: 24px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+
+.operator-level {
+
+    color: var(--gray-dark);
+
+    font-family: Orbitron;
+
+    font-size: 9px;
+
+}
+
+
+.operator-state {
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.operator-state.active {
+
+    color: #a7bdb0;
+
+}
+
+
+.operator-state.missing {
+
+    color: #b7a7a7;
+
+}
+
+
+.operator-state.classified {
+
+    color: #aaa;
+
+}
+
+
+.operator-state.unknown {
+
+    color: #777;
+
+}
+
+
+.operator-state.reserve {
+
+    color: #aaa;
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.operator-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    z-index: 100;
+
+}
+
+
+.operator-modal.open {
+
+    display: flex;
+
+}
+
+
+.modal-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.86);
+
+    backdrop-filter: blur(8px);
+
+}
+
+
+.operator-file {
+
+    width: min(1050px,100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #080a0b;
+
+    border: 1px solid var(--line-light);
+
+    position: relative;
+
+    z-index: 2;
+
+    box-shadow: 0 30px 100px rgba(0,0,0,.8);
+
+}
+
+
+.close-modal {
+
+    position: absolute;
+
+    top: 18px;
+    right: 20px;
+
+    width: 35px;
+    height: 35px;
+
+    background: transparent;
+
+    border: 1px solid var(--line);
+
+    color: var(--white);
+
+    font-size: 23px;
+
+    cursor: pointer;
+
+    z-index: 5;
+
+}
+
+
+.close-modal:hover {
+
+    background: var(--white);
+
+    color: var(--black);
+
+}
+
+
+.file-header {
+
+    padding: 22px 30px;
+
+    border-bottom: 1px solid var(--line);
+
+    display: flex;
+
+    justify-content: space-between;
+
+}
+
+
+.file-header span {
+
+    display: block;
+
+    color: var(--gray);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.file-header strong {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-family: Orbitron;
+
+    font-size: 11px;
+
+}
+
+
+.file-status {
+
+    align-self: center;
+
+    font-family: Orbitron;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.file-content {
+
+    padding: 35px;
+
+}
+
+
+.file-profile {
+
+    display: grid;
+
+    grid-template-columns: 180px 1fr;
+
+    gap: 30px;
+
+    align-items: center;
+
+}
+
+
+.profile-image {
+
+    height: 210px;
+
+    border: 1px solid var(--line);
+
+    display: grid;
+
+    place-items: center;
+
+    position: relative;
+
+}
+
+
+.profile-image span {
+
+    font-family: Orbitron;
+
+    font-size: 65px;
+
+    color: var(--gray-dark);
+
+}
+
+
+.profile-image small {
+
+    position: absolute;
+
+    bottom: 10px;
+
+    color: var(--gray-dark);
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.profile-name > span {
+
+    color: var(--gray);
+
+    font-family: Orbitron;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+}
+
+
+.profile-name h2 {
+
+    margin-top: 12px;
+
+    font-family: Orbitron;
+
+    font-size: 35px;
+
+}
+
+
+.profile-name p {
+
+    margin-top: 10px;
+
+    color: var(--gray);
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+.file-data {
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    border-top: 1px solid var(--line);
+
+    border-left: 1px solid var(--line);
+
+    margin-top: 35px;
+
+}
+
+
+.data-row {
+
+    padding: 17px;
+
+    border-right: 1px solid var(--line);
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.data-row span {
+
+    display: block;
+
+    color: var(--gray-dark);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.data-row strong {
+
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   FILE SECTIONS
+========================================================= */
+
+.file-section {
+
+    margin-top: 30px;
+
+}
+
+
+.file-section > span {
+
+    color: var(--gray);
+
+    font-family: Orbitron;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.file-section p {
+
+    margin-top: 12px;
+
+    color: #b6bdbe;
+
+    font-size: 12px;
+
+    line-height: 1.8;
+
+}
+
+
+.tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 12px;
+
+}
+
+
+.tags span {
+
+    padding: 9px 12px;
+
+    border: 1px solid var(--line);
+
+    color: var(--gray);
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.file-footer {
+
+    padding: 18px 30px;
+
+    border-top: 1px solid var(--line);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: var(--gray-dark);
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .access-container {
+
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+
+    }
+
+    .access-brand {
+
+        text-align: center;
+
+    }
+
+    .access-mark {
+
+        margin: 0 auto 25px;
+
+    }
+
+    .access-line {
+
+        margin: 25px auto 20px;
+
+    }
+
+    .command-header {
+
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+
+        padding: 20px 4vw;
+
+    }
+
+    .command-center {
+
+        display: none;
+
+    }
+
+    .system-status {
+
+        justify-self: start;
+
+    }
+
+    .overview-grid {
+
+        grid-template-columns: repeat(2,1fr);
+
+    }
+
+    .overview-card:nth-child(2) {
+
+        border-right: 0;
+
+    }
+
+    .overview-card:nth-child(3) {
+
+        border-top: 1px solid var(--line);
+
+    }
+
+    .overview-card:nth-child(4) {
+
+        border-top: 1px solid var(--line);
+
+    }
+
+    .operators-grid {
+
+        grid-template-columns: repeat(2,1fr);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .access-header {
+
+        padding: 0 20px;
+
+    }
+
+    .system-code {
+
+        display: none;
+
+    }
+
+    .access-main {
+
+        padding: 40px 20px;
+
+    }
+
+    .terminal-data {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .access-footer {
+
+        padding: 0 20px;
+
+    }
+
+    .access-footer span:nth-child(2) {
+
+        display: none;
+
+    }
+
+    .command-hero {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        justify-content: center;
+
+        gap: 50px;
+
+        padding: 60px 0;
+
+    }
+
+    .hero-system {
+
+        width: 100%;
+
+    }
+
+    .overview-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .overview-card {
+
+        border-right: 0 !important;
+
+        border-bottom: 1px solid var(--line);
+
+    }
+
+    .operators-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .section-heading {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+
+    }
+
+    .file-profile {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .file-data {
+
+        grid-template-columns: 1fr 1fr;
+
+    }
+
+    .file-content {
+
+        padding: 22px;
+
+    }
+
+    .file-footer {
+
+        flex-direction: column;
+
+        gap: 8px;
+
+    }
+
+}
