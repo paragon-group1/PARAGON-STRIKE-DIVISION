@@ -263,46 +263,54 @@ body {
 }
 
 
+/* =========================================================
+   ACCESS BRAND
+========================================================= */
+
 .access-brand {
 
     text-align: left;
+
+    position: relative;
+
+    z-index: 1;
 
 }
 
 
 .access-mark {
 
-    width: 110px;
-    height: 110px;
+    width: 900px;
+    height: 900px;
 
-    border: 1px solid rgba(255,255,255,.25);
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
 
     display: grid;
 
     place-items: center;
 
-    font-family: Orbitron;
+    pointer-events: none;
 
-    font-size: 50px;
+    z-index: -1;
 
-    font-weight: 700;
-
-    margin-bottom: 35px;
-
-    position: relative;
+    opacity: .07;
 
 }
 
 
-.access-mark::after {
+.access-mark img {
 
-    content: "";
+    width: 900px;
+    height: 900px;
 
-    position: absolute;
+    object-fit: contain;
 
-    inset: 8px;
-
-    border: 1px solid rgba(255,255,255,.08);
+    display: block;
 
 }
 
@@ -894,10 +902,10 @@ body {
 
 .system-circle {
 
-    width: 140px;
-    height: 140px;
+    width: 600px;
+    height: 600px;
 
-    border: 1px solid var(--line-light);
+    border: 0;
 
     border-radius: 50%;
 
@@ -907,31 +915,19 @@ body {
 
     position: relative;
 
-}
-
-
-.system-circle::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 12px;
-
-    border: 1px dashed var(--line-light);
-
-    border-radius: 50%;
+    flex-shrink: 0;
 
 }
 
 
-.system-circle span {
+.system-circle img {
 
-    font-family: Orbitron;
+    width: 600px;
+    height: 600px;
 
-    font-size: 38px;
+    object-fit: contain;
 
-    z-index: 1;
+    display: block;
 
 }
 
@@ -1692,6 +1688,25 @@ body {
    RESPONSIVE
 ========================================================= */
 
+@media (max-width: 1100px) {
+
+    .system-circle {
+
+        width: 420px;
+        height: 420px;
+
+    }
+
+    .system-circle img {
+
+        width: 420px;
+        height: 420px;
+
+    }
+
+}
+
+
 @media (max-width: 900px) {
 
     .access-container {
@@ -1710,7 +1725,22 @@ body {
 
     .access-mark {
 
-        margin: 0 auto 25px;
+        width: 700px;
+        height: 700px;
+
+        left: 50%;
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+        margin: 0;
+
+    }
+
+    .access-mark img {
+
+        width: 700px;
+        height: 700px;
 
     }
 
@@ -1772,6 +1802,26 @@ body {
 
     }
 
+    .hero-system {
+
+        gap: 20px;
+
+    }
+
+    .system-circle {
+
+        width: 320px;
+        height: 320px;
+
+    }
+
+    .system-circle img {
+
+        width: 320px;
+        height: 320px;
+
+    }
+
 }
 
 
@@ -1792,6 +1842,37 @@ body {
     .access-main {
 
         padding: 40px 20px;
+
+    }
+
+    .access-mark {
+
+        width: 500px;
+        height: 500px;
+
+        left: 50%;
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+    }
+
+    .access-mark img {
+
+        width: 500px;
+        height: 500px;
+
+    }
+
+    .access-brand h1 {
+
+        letter-spacing: 5px;
+
+    }
+
+    .access-brand h2 {
+
+        letter-spacing: 5px;
 
     }
 
@@ -1830,6 +1911,24 @@ body {
     .hero-system {
 
         width: 100%;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+    .system-circle {
+
+        width: 260px;
+        height: 260px;
+
+    }
+
+    .system-circle img {
+
+        width: 260px;
+        height: 260px;
 
     }
 
