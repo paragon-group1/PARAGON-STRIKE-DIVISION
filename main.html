@@ -1,1 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>PARAGON STRIKE DIVISION</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="access-page">
+
+    <!-- BACKGROUND -->
+    <div class="background-grid"></div>
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+
+    <!-- TOP SYSTEM INFORMATION -->
+    <header class="access-header">
+
+        <div class="brand-small">
+            <span class="brand-mark">P</span>
+
+            <div>
+                <strong>PARAGON</strong>
+                <small>STRIKE DIVISION</small>
+            </div>
+        </div>
+
+        <div class="system-code">
+            SYSTEM // ACCESS TERMINAL
+        </div>
+
+    </header>
+
+
+    <!-- MAIN ACCESS -->
+    <main class="access-main">
+
+        <section class="access-container">
+
+            <div class="access-brand">
+
+                <div class="access-mark">
+                    P
+                </div>
+
+                <h1>PARAGON</h1>
+
+                <h2>STRIKE DIVISION</h2>
+
+                <div class="access-line"></div>
+
+                <p>SECURE COMMAND NETWORK</p>
+
+            </div>
+
+
+            <!-- SYSTEM PANEL -->
+            <div class="system-panel">
+
+                <div class="panel-header">
+
+                    <span>SYSTEM BOOT</span>
+
+                    <span id="bootPercent">
+                        00%
+                    </span>
+
+                </div>
+
+
+                <div class="progress-container">
+
+                    <div
+                        id="progressBar"
+                        class="progress-bar">
+                    </div>
+
+                </div>
+
+
+                <div class="boot-status">
+
+                    <span class="status-dot"></span>
+
+                    <span id="bootStatus">
+                        INITIALIZING SYSTEM...
+                    </span>
+
+                </div>
+
+
+                <div class="terminal-data">
+
+                    <div>
+                        <span>CORE</span>
+                        <strong id="coreStatus">WAITING</strong>
+                    </div>
+
+                    <div>
+                        <span>NETWORK</span>
+                        <strong id="networkStatus">OFFLINE</strong>
+                    </div>
+
+                    <div>
+                        <span>SECURITY</span>
+                        <strong id="securityStatus">LOCKED</strong>
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="enterButton"
+                    class="enter-button"
+                    disabled>
+
+                    <span>ENTRAR</span>
+                    <small>ACCESS COMMAND</small>
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="access-footer">
+
+        <span>PARAGON STRIKE DIVISION</span>
+
+        <span>SECURE SYSTEM</span>
+
+        <span>© 2026</span>
+
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
