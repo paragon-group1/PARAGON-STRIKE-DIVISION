@@ -559,16 +559,72 @@ if (progressBar) {
 
 
 /* =========================================================
-   ENTER COMMAND
+   ENTER COMMAND + WELCOME AUDIO
 ========================================================= */
+
+const welcomeAudio =
+    document.getElementById("welcomeAudio");
+
 
 if (enterButton) {
 
-    enterButton.addEventListener("click", () => {
+    enterButton.addEventListener("click", async () => {
 
         if (enterButton.disabled) {
             return;
         }
+
+
+        /* REPRODUCIR AUDIO */
+
+        if (welcomeAudio) {
+
+            try {
+
+                welcomeAudio.currentTime = 0;
+
+                await welcomeAudio.play();
+
+
+                /* ESPERAR A QUE TERMINE EL AUDIO */
+
+                welcomeAudio.addEventListener(
+                    "ended",
+                    () => {
+
+                        document.body.style.transition =
+                            "opacity .5s ease";
+
+                        document.body.style.opacity = "0";
+
+
+                        setTimeout(() => {
+
+                            window.location.href =
+                                "html/command.html";
+
+                        }, 500);
+
+                    },
+                    { once: true }
+                );
+
+
+                return;
+
+            } catch (error) {
+
+                console.log(
+                    "No se pudo reproducir el audio:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* SI EL AUDIO FALLA, ENTRAR NORMALMENTE */
 
         document.body.style.transition =
             "opacity .5s ease";
