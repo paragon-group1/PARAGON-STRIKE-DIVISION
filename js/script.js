@@ -1060,14 +1060,26 @@ function closeOperator() {
         return;
     }
 
-
     modal.classList.remove(
         "open"
     );
 
 
-    document.body.style.overflow =
-        "";
+    if (operatorDatabaseModal) {
+
+        operatorDatabaseModal.classList.add(
+            "open"
+        );
+
+        document.body.style.overflow =
+            "hidden";
+
+    } else {
+
+        document.body.style.overflow =
+            "";
+
+    }
 
 }
 
