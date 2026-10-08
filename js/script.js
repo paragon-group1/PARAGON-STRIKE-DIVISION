@@ -1060,6 +1060,7 @@ function closeOperator() {
         return;
     }
 
+
     modal.classList.remove(
         "open"
     );
@@ -1070,6 +1071,7 @@ function closeOperator() {
         operatorDatabaseModal.classList.add(
             "open"
         );
+
 
         document.body.style.overflow =
             "hidden";
