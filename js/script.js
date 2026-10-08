@@ -466,7 +466,6 @@ if (progressBar) {
 
     let progress = 0;
 
-
     const bootMessages = [
 
         {
@@ -512,10 +511,8 @@ if (progressBar) {
 
             progress++;
 
-
             progressBar.style.width =
                 `${progress}%`;
-
 
             bootPercent.textContent =
                 `${String(progress).padStart(2, "0")}%`;
@@ -565,15 +562,12 @@ if (progressBar) {
 
                 clearInterval(bootInterval);
 
-
                 enterButton.disabled =
                     false;
-
 
                 enterButton.classList.add(
                     "ready"
                 );
-
 
                 enterButton.focus();
 
@@ -603,10 +597,6 @@ if (enterButton) {
             }
 
 
-            /* =============================================
-               PLAY WELCOME AUDIO
-            ============================================= */
-
             if (welcomeAudio) {
 
                 try {
@@ -615,10 +605,6 @@ if (enterButton) {
 
                     await welcomeAudio.play();
 
-
-                    /* =====================================
-                       REDIRECT AFTER AUDIO
-                    ===================================== */
 
                     welcomeAudio.addEventListener(
                         "ended",
@@ -657,11 +643,6 @@ if (enterButton) {
             }
 
 
-            /* =============================================
-               FALLBACK
-               IF AUDIO CANNOT PLAY
-            ============================================= */
-
             document.body.style.transition =
                 "opacity .5s ease";
 
@@ -689,6 +670,30 @@ if (enterButton) {
 const operatorsGrid =
     document.getElementById("operatorsGrid");
 
+const operatorDatabaseModal =
+    document.getElementById(
+        "operatorDatabaseModal"
+    );
+
+const openOperators =
+    document.getElementById(
+        "openOperators"
+    );
+
+const navOperators =
+    document.getElementById(
+        "navOperators"
+    );
+
+const closeDatabase =
+    document.getElementById(
+        "closeDatabase"
+    );
+
+
+/* =========================================================
+   GENERATE OPERATOR CARDS
+========================================================= */
 
 if (operatorsGrid) {
 
@@ -754,14 +759,112 @@ if (operatorsGrid) {
 
 
 /* =========================================================
-   OPERATOR MODAL
+   OPEN DATABASE
+========================================================= */
+
+function openOperatorDatabase() {
+
+    if (!operatorDatabaseModal) {
+        return;
+    }
+
+
+    operatorDatabaseModal.classList.add(
+        "open"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+if (openOperators) {
+
+    openOperators.addEventListener(
+        "click",
+        openOperatorDatabase
+    );
+
+}
+
+
+if (navOperators) {
+
+    navOperators.addEventListener(
+        "click",
+        openOperatorDatabase
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE DATABASE
+========================================================= */
+
+function closeOperatorDatabase() {
+
+    if (!operatorDatabaseModal) {
+        return;
+    }
+
+
+    operatorDatabaseModal.classList.remove(
+        "open"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+if (closeDatabase) {
+
+    closeDatabase.addEventListener(
+        "click",
+        closeOperatorDatabase
+    );
+
+}
+
+
+if (operatorDatabaseModal) {
+
+    const databaseOverlay =
+        operatorDatabaseModal.querySelector(
+            ".database-overlay"
+        );
+
+
+    if (databaseOverlay) {
+
+        databaseOverlay.addEventListener(
+            "click",
+            closeOperatorDatabase
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   OPERATOR FILE MODAL
 ========================================================= */
 
 const modal =
-    document.getElementById("operatorModal");
+    document.getElementById(
+        "operatorModal"
+    );
 
 const closeModal =
-    document.getElementById("closeModal");
+    document.getElementById(
+        "closeModal"
+    );
 
 
 function openOperator(operator) {
@@ -873,6 +976,13 @@ function openOperator(operator) {
     );
 
 
+    /* =============================================
+       CLOSE DATABASE BEFORE OPENING FILE
+    ============================================= */
+
+    closeOperatorDatabase();
+
+
     modal.classList.add("open");
 
 
@@ -941,7 +1051,7 @@ function renderTags(
 
 
 /* =========================================================
-   CLOSE MODAL
+   CLOSE OPERATOR FILE
 ========================================================= */
 
 function closeOperator() {
@@ -951,7 +1061,9 @@ function closeOperator() {
     }
 
 
-    modal.classList.remove("open");
+    modal.classList.remove(
+        "open"
+    );
 
 
     document.body.style.overflow =
@@ -959,6 +1071,10 @@ function closeOperator() {
 
 }
 
+
+/* =========================================================
+   CLOSE OPERATOR FILE BUTTON
+========================================================= */
 
 if (closeModal) {
 
@@ -969,6 +1085,10 @@ if (closeModal) {
 
 }
 
+
+/* =========================================================
+   OPERATOR FILE OVERLAY
+========================================================= */
 
 if (modal) {
 
@@ -999,12 +1119,34 @@ document.addEventListener(
     event => {
 
         if (
-            event.key === "Escape" &&
+            event.key !== "Escape"
+        ) {
+            return;
+        }
+
+
+        /* CLOSE OPERATOR FILE FIRST */
+
+        if (
             modal &&
             modal.classList.contains("open")
         ) {
 
             closeOperator();
+
+            return;
+
+        }
+
+
+        /* CLOSE DATABASE */
+
+        if (
+            operatorDatabaseModal &&
+            operatorDatabaseModal.classList.contains("open")
+        ) {
+
+            closeOperatorDatabase();
 
         }
 
