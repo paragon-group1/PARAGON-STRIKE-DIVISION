@@ -440,15 +440,26 @@ const operators = [
    ACCESS SYSTEM
 ========================================================= */
 
-const progressBar = document.getElementById("progressBar");
-const bootPercent = document.getElementById("bootPercent");
-const bootStatus = document.getElementById("bootStatus");
+const progressBar =
+    document.getElementById("progressBar");
 
-const coreStatus = document.getElementById("coreStatus");
-const networkStatus = document.getElementById("networkStatus");
-const securityStatus = document.getElementById("securityStatus");
+const bootPercent =
+    document.getElementById("bootPercent");
 
-const enterButton = document.getElementById("enterButton");
+const bootStatus =
+    document.getElementById("bootStatus");
+
+const coreStatus =
+    document.getElementById("coreStatus");
+
+const networkStatus =
+    document.getElementById("networkStatus");
+
+const securityStatus =
+    document.getElementById("securityStatus");
+
+const enterButton =
+    document.getElementById("enterButton");
 
 
 if (progressBar) {
@@ -496,64 +507,79 @@ if (progressBar) {
     ];
 
 
-    const bootInterval = setInterval(() => {
+    const bootInterval =
+        setInterval(() => {
 
-        progress++;
-
-        progressBar.style.width = `${progress}%`;
-
-        bootPercent.textContent =
-            `${String(progress).padStart(2, "0")}%`;
+            progress++;
 
 
-        const currentMessage =
-            [...bootMessages]
-            .reverse()
-            .find(item => progress >= item.percent);
+            progressBar.style.width =
+                `${progress}%`;
 
 
-        if (currentMessage) {
-
-            bootStatus.textContent =
-                currentMessage.message;
-
-        }
+            bootPercent.textContent =
+                `${String(progress).padStart(2, "0")}%`;
 
 
-        if (progress >= 25) {
-
-            coreStatus.textContent = "ONLINE";
-
-        }
-
-
-        if (progress >= 55) {
-
-            networkStatus.textContent = "SECURE";
-
-        }
+            const currentMessage =
+                [...bootMessages]
+                .reverse()
+                .find(
+                    item => progress >= item.percent
+                );
 
 
-        if (progress >= 82) {
+            if (currentMessage) {
 
-            securityStatus.textContent = "VERIFIED";
+                bootStatus.textContent =
+                    currentMessage.message;
 
-        }
+            }
 
 
-        if (progress >= 100) {
+            if (progress >= 25) {
 
-            clearInterval(bootInterval);
+                coreStatus.textContent =
+                    "ONLINE";
 
-            enterButton.disabled = false;
+            }
 
-            enterButton.classList.add("ready");
 
-            enterButton.focus();
+            if (progress >= 55) {
 
-        }
+                networkStatus.textContent =
+                    "SECURE";
 
-    }, 35);
+            }
+
+
+            if (progress >= 82) {
+
+                securityStatus.textContent =
+                    "VERIFIED";
+
+            }
+
+
+            if (progress >= 100) {
+
+                clearInterval(bootInterval);
+
+
+                enterButton.disabled =
+                    false;
+
+
+                enterButton.classList.add(
+                    "ready"
+                );
+
+
+                enterButton.focus();
+
+            }
+
+        }, 35);
 
 }
 
@@ -568,78 +594,90 @@ const welcomeAudio =
 
 if (enterButton) {
 
-    enterButton.addEventListener("click", async () => {
+    enterButton.addEventListener(
+        "click",
+        async () => {
 
-        if (enterButton.disabled) {
-            return;
-        }
-
-
-        /* REPRODUCIR AUDIO */
-
-        if (welcomeAudio) {
-
-            try {
-
-                welcomeAudio.currentTime = 0;
-
-                await welcomeAudio.play();
-
-
-                /* ESPERAR A QUE TERMINE EL AUDIO */
-
-                welcomeAudio.addEventListener(
-                    "ended",
-                    () => {
-
-                        document.body.style.transition =
-                            "opacity .5s ease";
-
-                        document.body.style.opacity = "0";
-
-
-                        setTimeout(() => {
-
-                            window.location.href =
-                                "html/command.html";
-
-                        }, 500);
-
-                    },
-                    { once: true }
-                );
-
-
+            if (enterButton.disabled) {
                 return;
+            }
 
-            } catch (error) {
 
-                console.log(
-                    "No se pudo reproducir el audio:",
-                    error
-                );
+            /* =============================================
+               PLAY WELCOME AUDIO
+            ============================================= */
+
+            if (welcomeAudio) {
+
+                try {
+
+                    welcomeAudio.currentTime = 0;
+
+                    await welcomeAudio.play();
+
+
+                    /* =====================================
+                       REDIRECT AFTER AUDIO
+                    ===================================== */
+
+                    welcomeAudio.addEventListener(
+                        "ended",
+                        () => {
+
+                            document.body.style.transition =
+                                "opacity .5s ease";
+
+                            document.body.style.opacity =
+                                "0";
+
+
+                            setTimeout(() => {
+
+                                window.location.href =
+                                    "html/command.html";
+
+                            }, 500);
+
+                        },
+                        { once: true }
+                    );
+
+
+                    return;
+
+                } catch (error) {
+
+                    console.log(
+                        "No se pudo reproducir el audio:",
+                        error
+                    );
+
+                }
 
             }
 
+
+            /* =============================================
+               FALLBACK
+               IF AUDIO CANNOT PLAY
+            ============================================= */
+
+            document.body.style.transition =
+                "opacity .5s ease";
+
+            document.body.style.opacity =
+                "0";
+
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "html/command.html";
+
+            }, 500);
+
         }
-
-
-        /* SI EL AUDIO FALLA, ENTRAR NORMALMENTE */
-
-        document.body.style.transition =
-            "opacity .5s ease";
-
-        document.body.style.opacity = "0";
-
-
-        setTimeout(() => {
-
-            window.location.href =
-                "html/command.html";
-
-        }, 500);
-
-    });
+    );
 
 }
 
@@ -698,11 +736,14 @@ if (operatorsGrid) {
         `;
 
 
-        card.addEventListener("click", () => {
+        card.addEventListener(
+            "click",
+            () => {
 
-            openOperator(operator);
+                openOperator(operator);
 
-        });
+            }
+        );
 
 
         operatorsGrid.appendChild(card);
@@ -725,66 +766,98 @@ const closeModal =
 
 function openOperator(operator) {
 
-    if (!modal) return;
+    if (!modal) {
+        return;
+    }
 
 
-    document.getElementById("fileCode").textContent =
+    document.getElementById(
+        "fileCode"
+    ).textContent =
         `OPERATOR ${operator.id}`;
 
 
-    document.getElementById("fileStatus").textContent =
+    document.getElementById(
+        "fileStatus"
+    ).textContent =
         `● ${operator.status}`;
 
 
-    document.getElementById("fileStatus").className =
+    document.getElementById(
+        "fileStatus"
+    ).className =
         `file-status ${operator.statusClass}`;
 
 
-    document.getElementById("profileInitial").textContent =
+    document.getElementById(
+        "profileInitial"
+    ).textContent =
         operator.codename.charAt(0);
 
 
-    document.getElementById("profileCodename").textContent =
+    document.getElementById(
+        "profileCodename"
+    ).textContent =
         operator.codename;
 
 
-    document.getElementById("profileName").textContent =
+    document.getElementById(
+        "profileName"
+    ).textContent =
         operator.name;
 
 
-    document.getElementById("profileSpecialty").textContent =
+    document.getElementById(
+        "profileSpecialty"
+    ).textContent =
         operator.specialty.toUpperCase();
 
 
-    document.getElementById("dataAge").textContent =
+    document.getElementById(
+        "dataAge"
+    ).textContent =
         operator.age;
 
 
-    document.getElementById("dataHeight").textContent =
+    document.getElementById(
+        "dataHeight"
+    ).textContent =
         operator.height;
 
 
-    document.getElementById("dataWeight").textContent =
+    document.getElementById(
+        "dataWeight"
+    ).textContent =
         operator.weight;
 
 
-    document.getElementById("dataLevel").textContent =
+    document.getElementById(
+        "dataLevel"
+    ).textContent =
         operator.level;
 
 
-    document.getElementById("dataHair").textContent =
+    document.getElementById(
+        "dataHair"
+    ).textContent =
         operator.hair;
 
 
-    document.getElementById("dataEyes").textContent =
+    document.getElementById(
+        "dataEyes"
+    ).textContent =
         operator.eyes;
 
 
-    document.getElementById("profileHistory").textContent =
+    document.getElementById(
+        "profileHistory"
+    ).textContent =
         operator.history;
 
 
-    document.getElementById("profileDescription").textContent =
+    document.getElementById(
+        "profileDescription"
+    ).textContent =
         operator.profile;
 
 
@@ -802,7 +875,9 @@ function openOperator(operator) {
 
     modal.classList.add("open");
 
-    document.body.style.overflow = "hidden";
+
+    document.body.style.overflow =
+        "hidden";
 
 }
 
@@ -811,10 +886,20 @@ function openOperator(operator) {
    TAGS
 ========================================================= */
 
-function renderTags(containerId, items) {
+function renderTags(
+    containerId,
+    items
+) {
 
     const container =
-        document.getElementById(containerId);
+        document.getElementById(
+            containerId
+        );
+
+
+    if (!container) {
+        return;
+    }
 
 
     container.innerHTML = "";
@@ -825,10 +910,13 @@ function renderTags(containerId, items) {
         const empty =
             document.createElement("span");
 
+
         empty.textContent =
             "NO DATA AVAILABLE";
 
+
         container.appendChild(empty);
+
 
         return;
 
@@ -840,7 +928,10 @@ function renderTags(containerId, items) {
         const tag =
             document.createElement("span");
 
-        tag.textContent = item;
+
+        tag.textContent =
+            item;
+
 
         container.appendChild(tag);
 
@@ -855,11 +946,16 @@ function renderTags(containerId, items) {
 
 function closeOperator() {
 
-    if (!modal) return;
+    if (!modal) {
+        return;
+    }
+
 
     modal.classList.remove("open");
 
-    document.body.style.overflow = "";
+
+    document.body.style.overflow =
+        "";
 
 }
 
@@ -876,12 +972,20 @@ if (closeModal) {
 
 if (modal) {
 
-    modal
-        .querySelector(".modal-overlay")
-        .addEventListener(
+    const modalOverlay =
+        modal.querySelector(
+            ".modal-overlay"
+        );
+
+
+    if (modalOverlay) {
+
+        modalOverlay.addEventListener(
             "click",
             closeOperator
         );
+
+    }
 
 }
 
@@ -890,16 +994,19 @@ if (modal) {
    ESC KEY
 ========================================================= */
 
-document.addEventListener("keydown", event => {
+document.addEventListener(
+    "keydown",
+    event => {
 
-    if (
-        event.key === "Escape" &&
-        modal &&
-        modal.classList.contains("open")
-    ) {
+        if (
+            event.key === "Escape" &&
+            modal &&
+            modal.classList.contains("open")
+        ) {
 
-        closeOperator();
+            closeOperator();
+
+        }
 
     }
-
-});
+);
