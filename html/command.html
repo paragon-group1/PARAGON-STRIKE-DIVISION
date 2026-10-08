@@ -88,7 +88,9 @@
             COMMAND
         </button>
 
-        <button class="nav-button">
+        <button
+            id="navOperators"
+            class="nav-button">
             OPERADORES
         </button>
 
@@ -143,13 +145,13 @@
 
             <div class="hero-system">
 
-               <div class="system-circle">
+                <div class="system-circle">
 
- <img
-    src="../assets/logo/paragon-logo-transparent.png"
-    alt="PARAGON STRIKE DIVISION">
+                    <img
+                        src="../assets/logo/paragon-logo-transparent.png"
+                        alt="PARAGON STRIKE DIVISION">
 
-</div>
+                </div>
 
                 <div>
 
@@ -265,7 +267,7 @@
 
 
 
-        <!-- OPERATORS -->
+        <!-- OPERATORS ACCESS -->
 
         <section class="operators-section">
 
@@ -290,9 +292,30 @@
             </div>
 
 
-            <div
-                id="operatorsGrid"
-                class="operators-grid">
+            <div class="operators-access">
+
+                <button
+                    id="openOperators"
+                    class="operators-access-button">
+
+                    <span class="button-code">
+                        DATABASE // 01
+                    </span>
+
+                    <strong>
+                        OPERADORES
+                    </strong>
+
+                    <small>
+                        ACCEDER A PERSONAL REGISTRADO
+                    </small>
+
+                    <span class="access-arrow">
+                        →
+                    </span>
+
+                </button>
+
             </div>
 
         </section>
@@ -302,7 +325,105 @@
 
 
 
-    <!-- OPERATOR MODAL -->
+    <!-- =====================================================
+         OPERATOR DATABASE MODAL
+    ====================================================== -->
+
+    <div
+        id="operatorDatabaseModal"
+        class="operator-database-modal">
+
+        <div class="database-overlay"></div>
+
+
+        <div class="operator-database">
+
+
+            <!-- DATABASE HEADER -->
+
+            <div class="database-header">
+
+                <div>
+
+                    <span>
+                        PARAGON // PERSONNEL DATABASE
+                    </span>
+
+                    <strong>
+                        OPERATOR DATABASE
+                    </strong>
+
+                </div>
+
+
+                <button
+                    id="closeDatabase"
+                    class="close-database"
+                    aria-label="Cerrar base de datos">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+            <!-- DATABASE CONTENT -->
+
+            <div class="database-content">
+
+                <div class="database-info">
+
+                    <span>
+                        DATABASE // 01
+                    </span>
+
+                    <strong>
+                        PERSONAL REGISTRADO
+                    </strong>
+
+                    <small>
+                        SELECCIONE UN OPERADOR PARA CONSULTAR SU EXPEDIENTE
+                    </small>
+
+                </div>
+
+
+                <div
+                    id="operatorsGrid"
+                    class="operators-grid">
+                </div>
+
+            </div>
+
+
+            <!-- DATABASE FOOTER -->
+
+            <div class="database-footer">
+
+                <span>
+                    PARAGON STRIKE DIVISION
+                </span>
+
+                <span>
+                    CLASSIFIED PERSONNEL DATABASE
+                </span>
+
+                <span>
+                    14 FILES
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         OPERATOR FILE MODAL
+    ====================================================== -->
 
     <div
         id="operatorModal"
@@ -367,18 +488,15 @@
 
                     <div class="profile-name">
 
-                        <span
-                            id="profileCodename">
+                        <span id="profileCodename">
                             ATLAS
                         </span>
 
-                        <h2
-                            id="profileName">
+                        <h2 id="profileName">
                             Daniel Voss
                         </h2>
 
-                        <p
-                            id="profileSpecialty">
+                        <p id="profileSpecialty">
                             COMMAND / LEADERSHIP
                         </p>
 
@@ -395,41 +513,52 @@
                     <div class="data-row">
 
                         <span>EDAD</span>
+
                         <strong id="dataAge"></strong>
 
                     </div>
 
+
                     <div class="data-row">
 
                         <span>ALTURA</span>
+
                         <strong id="dataHeight"></strong>
 
                     </div>
 
+
                     <div class="data-row">
 
                         <span>PESO</span>
+
                         <strong id="dataWeight"></strong>
 
                     </div>
 
+
                     <div class="data-row">
 
                         <span>NIVEL</span>
+
                         <strong id="dataLevel"></strong>
 
                     </div>
 
+
                     <div class="data-row">
 
                         <span>CABELLO</span>
+
                         <strong id="dataHair"></strong>
 
                     </div>
 
+
                     <div class="data-row">
 
                         <span>OJOS</span>
+
                         <strong id="dataEyes"></strong>
 
                     </div>
@@ -469,53 +598,59 @@
 
 
 
-<!-- OPERATORS ACCESS -->
+                <!-- OPERATIONS -->
 
-<section class="operators-section">
+                <div class="file-section">
 
-    <div class="section-heading">
+                    <span>
+                        OPERACIONES
+                    </span>
 
-        <div>
+                    <div
+                        id="operations"
+                        class="tags">
+                    </div>
 
-            <span class="section-code">
-                DATABASE // 01
-            </span>
+                </div>
 
-            <h2>
-                BASE DE DATOS DE OPERADORES
-            </h2>
 
-        </div>
 
-        <div class="operator-counter">
-            14 FILES
+                <!-- PROFILE -->
+
+                <div class="file-section">
+
+                    <span>
+                        PERFIL
+                    </span>
+
+                    <p id="profileDescription"></p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="file-footer">
+
+                <span>
+                    PARAGON STRIKE DIVISION
+                </span>
+
+                <span>
+                    CLASSIFIED PERSONNEL DATABASE
+                </span>
+
+            </div>
+
         </div>
 
     </div>
 
 
-    <div class="operators-access">
 
-        <button
-            id="openOperators"
-            class="operators-access-button">
+    <script src="../js/script.js"></script>
 
-            <span class="button-code">
-                DATABASE // 01
-            </span>
-
-            <strong>
-                OPERADORES
-            </strong>
-
-            <small>
-                ACCEDER A PERSONAL REGISTRADO
-            </small>
-
-        </button>
-
-    </div>
-
-</section>
+</body>
 
 </html>
