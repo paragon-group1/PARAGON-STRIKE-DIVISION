@@ -1297,7 +1297,575 @@ body {
 
 }
 
+/* =========================================================
+   OPERATORS ACCESS
+========================================================= */
 
+.operators-access {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+}
+
+
+.operators-access-button {
+
+    width: 100%;
+
+    min-height: 150px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 30px;
+
+    text-align: left;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,.008)
+        );
+
+    border: 1px solid var(--line);
+
+    color: var(--white);
+
+    cursor: pointer;
+
+    transition:
+        border-color .3s ease,
+        background .3s ease,
+        transform .3s ease;
+
+}
+
+
+.operators-access-button::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    height: 2px;
+
+    background: transparent;
+
+    transition: .3s;
+
+}
+
+
+.operators-access-button::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.035),
+            transparent
+        );
+
+    transition: left .6s ease;
+
+}
+
+
+.operators-access-button:hover {
+
+    border-color: var(--line-light);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.015)
+        );
+
+    transform: translateY(-3px);
+
+}
+
+
+.operators-access-button:hover::before {
+
+    background: var(--white);
+
+}
+
+
+.operators-access-button:hover::after {
+
+    left: 100%;
+
+}
+
+
+.button-code {
+
+    display: block;
+
+    color: var(--gray-dark);
+
+    font-family: Orbitron;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.operators-access-button strong {
+
+    display: block;
+
+    margin-top: 18px;
+
+    font-family: Orbitron;
+
+    font-size: clamp(22px, 3vw, 34px);
+
+    letter-spacing: 4px;
+
+}
+
+
+.operators-access-button small {
+
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--gray);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.access-arrow {
+
+    position: absolute;
+
+    right: 30px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: var(--gray);
+
+    font-family: Orbitron;
+
+    font-size: 25px;
+
+    transition: .3s;
+
+}
+
+
+.operators-access-button:hover .access-arrow {
+
+    color: var(--white);
+
+    right: 24px;
+
+}
+
+
+/* =========================================================
+   OPERATOR DATABASE MODAL
+========================================================= */
+
+.operator-database-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 25px;
+
+    z-index: 90;
+
+}
+
+
+.operator-database-modal.open {
+
+    display: flex;
+
+}
+
+
+.database-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.88);
+
+    backdrop-filter: blur(9px);
+
+}
+
+
+.operator-database {
+
+    width: min(1250px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    position: relative;
+
+    z-index: 2;
+
+    background: #080a0b;
+
+    border: 1px solid var(--line-light);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.85);
+
+}
+
+
+.database-header {
+
+    min-height: 80px;
+
+    padding: 20px 30px;
+
+    border-bottom: 1px solid var(--line);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.database-header span {
+
+    display: block;
+
+    color: var(--gray);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.database-header strong {
+
+    display: block;
+
+    margin-top: 6px;
+
+    font-family: Orbitron;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.close-database {
+
+    width: 38px;
+
+    height: 38px;
+
+    background: transparent;
+
+    border: 1px solid var(--line);
+
+    color: var(--white);
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+
+.close-database:hover {
+
+    background: var(--white);
+
+    color: var(--black);
+
+}
+
+
+.database-content {
+
+    padding: 30px;
+
+}
+
+
+.database-info {
+
+    margin-bottom: 25px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+.database-info span {
+
+    display: block;
+
+    color: var(--gray-dark);
+
+    font-family: Orbitron;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.database-info strong {
+
+    display: block;
+
+    margin-top: 7px;
+
+    font-family: Orbitron;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.database-info small {
+
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--gray);
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.database-content .operators-grid {
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 12px;
+
+}
+
+
+.database-content .operator-card {
+
+    min-height: 220px;
+
+}
+
+
+/* =========================================================
+   DATABASE FOOTER
+========================================================= */
+
+.database-footer {
+
+    min-height: 55px;
+
+    padding: 18px 30px;
+
+    border-top: 1px solid var(--line);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    color: var(--gray-dark);
+
+    font-size: 7px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* =========================================================
+   DATABASE SCROLLBAR
+========================================================= */
+
+.operator-database::-webkit-scrollbar {
+
+    width: 5px;
+
+}
+
+
+.operator-database::-webkit-scrollbar-track {
+
+    background: #050607;
+
+}
+
+
+.operator-database::-webkit-scrollbar-thumb {
+
+    background: #303638;
+
+}
+
+
+.operator-database::-webkit-scrollbar-thumb:hover {
+
+    background: #596164;
+
+}
+
+
+/* =========================================================
+   DATABASE RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .database-content .operators-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .operators-access-button {
+
+        min-height: 130px;
+
+        padding: 22px;
+
+    }
+
+
+    .operators-access-button strong {
+
+        font-size: 22px;
+
+    }
+
+
+    .access-arrow {
+
+        right: 20px;
+
+    }
+
+
+    .operator-database-modal {
+
+        padding: 12px;
+
+    }
+
+
+    .operator-database {
+
+        max-height: 94vh;
+
+    }
+
+
+    .database-header {
+
+        padding: 18px 20px;
+
+    }
+
+
+    .database-content {
+
+        padding: 20px;
+
+    }
+
+
+    .database-content .operators-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .database-footer {
+
+        padding: 15px 20px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 8px;
+
+    }
+
+}
 /* =========================================================
    MODAL
 ========================================================= */
