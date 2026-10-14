@@ -1,130 +1,184 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>PARAGON // COMMAND</title>
 
+    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- MAPA INTERACTIVO: LEAFLET -->
     <link
         rel="stylesheet"
-        href="../css/style.css">
-
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
-
 
 <body class="command-page">
 
     <div class="background-grid"></div>
     <div class="scanlines"></div>
 
-
     <!-- HEADER -->
 
     <header class="command-header">
 
         <div class="command-brand">
-
-            <div class="brand-mark">
-                P
-            </div>
+            <div class="brand-mark">P</div>
 
             <div>
-
                 <strong>PARAGON</strong>
-
-                <span>
-                    STRIKE DIVISION
-                </span>
-
+                <span>STRIKE DIVISION</span>
             </div>
-
         </div>
-
 
         <div class="command-center">
-
-            <span>
-                COMMAND NETWORK
-            </span>
-
-            <strong>
-                SECURE CONNECTION
-            </strong>
-
+            <span>COMMAND NETWORK</span>
+            <strong>SECURE CONNECTION</strong>
         </div>
 
-
         <div class="system-status">
-
             <span class="online-dot"></span>
 
             <div>
-
                 <strong>SYSTEM ONLINE</strong>
-
-                <small>
-                    ACCESS LEVEL 04
-                </small>
-
+                <small>ACCESS LEVEL 04</small>
             </div>
-
         </div>
 
     </header>
 
 
+    <!-- SIDEBAR -->
 
-    <!-- NAVIGATION -->
+    <aside class="command-sidebar" id="commandSidebar">
 
-    <nav class="command-nav">
+        <div class="sidebar-heading">
+            <span class="sidebar-label">MAIN MENU</span>
+            <span class="sidebar-line"></span>
+        </div>
 
-        <button class="nav-button active">
-            COMMAND
+        <button
+            class="sidebar-button active"
+            data-view="command"
+            type="button">
+
+            <span class="sidebar-icon">⌂</span>
+            <span class="sidebar-text">COMMAND</span>
+            <span class="sidebar-indicator"></span>
+
         </button>
 
         <button
+            class="sidebar-button"
+            data-view="map"
+            type="button">
+
+            <span class="sidebar-icon">◎</span>
+            <span class="sidebar-text">MAP</span>
+            <span class="sidebar-indicator"></span>
+
+        </button>
+
+        <button
+            class="sidebar-button"
             id="navOperators"
-            class="nav-button">
-            OPERADORES
+            type="button">
+
+            <span class="sidebar-icon">◈</span>
+            <span class="sidebar-text">OPERATORS</span>
+            <span class="sidebar-indicator"></span>
+
         </button>
 
-        <button class="nav-button">
-            OPERACIONES
+
+        <div class="sidebar-heading sidebar-heading-secondary">
+            <span class="sidebar-label">INTELLIGENCE</span>
+            <span class="sidebar-line"></span>
+        </div>
+
+        <button
+            class="sidebar-button"
+            data-view="activity"
+            type="button">
+
+            <span class="sidebar-icon">≡</span>
+            <span class="sidebar-text">ACTIVITY LOG</span>
+            <span class="sidebar-indicator"></span>
+
         </button>
 
-        <button class="nav-button">
-            INTELIGENCIA
+        <button
+            class="sidebar-button"
+            data-view="diagnostics"
+            type="button">
+
+            <span class="sidebar-icon">⌁</span>
+            <span class="sidebar-text">DIAGNOSTICS</span>
+            <span class="sidebar-indicator"></span>
+
         </button>
 
-        <button class="nav-button">
-            EQUIPAMIENTO
+        <button
+            class="sidebar-button"
+            data-view="equipment"
+            type="button">
+
+            <span class="sidebar-icon">◇</span>
+            <span class="sidebar-text">EQUIPMENT</span>
+            <span class="sidebar-indicator"></span>
+
         </button>
 
-        <button class="nav-button">
-            ARCHIVOS
-        </button>
 
-    </nav>
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-connection">
+                <span class="online-dot"></span>
+
+                <div>
+                    <strong>LOCAL INTERFACE</strong>
+                    <small id="sidebarConnectionStatus">
+                        CHECKING CONNECTION
+                    </small>
+                </div>
+            </div>
+
+            <button
+                class="sidebar-button"
+                data-view="settings"
+                type="button">
+
+                <span class="sidebar-icon">⚙</span>
+                <span class="sidebar-text">SETTINGS</span>
+                <span class="sidebar-indicator"></span>
+
+            </button>
+
+            <div class="sidebar-version">
+                PARAGON STRIKE DIVISION
+                <span>COMMAND INTERFACE // V1.0</span>
+            </div>
+
+        </div>
+
+    </aside>
 
 
+    <!-- ==================================================
+         MODULE 01 // COMMAND DASHBOARD
+    =================================================== -->
 
-    <!-- MAIN COMMAND -->
-
-    <main class="command-main">
-
-
-        <!-- HERO -->
+    <main
+        class="command-main module-view active"
+        id="commandView"
+        data-module="command">
 
         <section class="command-hero">
 
             <div>
-
                 <span class="section-code">
                     PARAGON // COMMAND CENTER
                 </span>
@@ -139,132 +193,68 @@
                     personal y operaciones de
                     PARAGON STRIKE DIVISION.
                 </p>
-
             </div>
-
 
             <div class="hero-system">
 
                 <div class="system-circle">
-
                     <img
                         src="../assets/logo/paragon-logo-transparent.png"
-                        alt="PARAGON STRIKE DIVISION">
-
+                        alt="Emblema de PARAGON STRIKE DIVISION">
                 </div>
 
                 <div>
-
-                    <small>
-                        NETWORK STATUS
-                    </small>
-
-                    <strong>
-                        OPERATIONAL
-                    </strong>
-
-                    <span>
-                        ENCRYPTED CONNECTION
-                    </span>
-
+                    <small>NETWORK STATUS</small>
+                    <strong>OPERATIONAL</strong>
+                    <span>ENCRYPTED CONNECTION</span>
                 </div>
 
             </div>
 
         </section>
-
 
 
         <!-- SYSTEM OVERVIEW -->
 
         <section class="overview-grid">
 
-
             <div class="overview-card">
-
-                <span class="card-number">
-                    01
-                </span>
-
-                <small>
-                    OPERADORES
-                </small>
-
-                <strong>
-                    14
-                </strong>
-
+                <span class="card-number">01</span>
+                <small>OPERADORES</small>
+                <strong>14</strong>
                 <span class="card-status">
                     PERSONNEL REGISTERED
                 </span>
-
             </div>
 
-
             <div class="overview-card">
-
-                <span class="card-number">
-                    02
-                </span>
-
-                <small>
-                    OPERADORES ACTIVOS
-                </small>
-
-                <strong>
-                    10
-                </strong>
-
+                <span class="card-number">02</span>
+                <small>OPERADORES ACTIVOS</small>
+                <strong>10</strong>
                 <span class="card-status">
                     ACTIVE PERSONNEL
                 </span>
-
             </div>
 
-
             <div class="overview-card">
-
-                <span class="card-number">
-                    03
-                </span>
-
-                <small>
-                    NIVEL MÁXIMO
-                </small>
-
-                <strong>
-                    05
-                </strong>
-
+                <span class="card-number">03</span>
+                <small>NIVEL MÁXIMO</small>
+                <strong>05</strong>
                 <span class="card-status">
                     RESTRICTED ACCESS
                 </span>
-
             </div>
 
-
             <div class="overview-card">
-
-                <span class="card-number">
-                    04
-                </span>
-
-                <small>
-                    SISTEMA
-                </small>
-
-                <strong>
-                    ONLINE
-                </strong>
-
+                <span class="card-number">04</span>
+                <small>SISTEMA</small>
+                <strong>ONLINE</strong>
                 <span class="card-status">
                     ALL SYSTEMS NOMINAL
                 </span>
-
             </div>
 
         </section>
-
 
 
         <!-- OPERATORS ACCESS -->
@@ -274,15 +264,11 @@
             <div class="section-heading">
 
                 <div>
-
                     <span class="section-code">
                         DATABASE // 01
                     </span>
 
-                    <h2>
-                        BASE DE DATOS DE OPERADORES
-                    </h2>
-
+                    <h2>BASE DE DATOS DE OPERADORES</h2>
                 </div>
 
                 <div class="operator-counter">
@@ -291,28 +277,24 @@
 
             </div>
 
-
             <div class="operators-access">
 
                 <button
                     id="openOperators"
-                    class="operators-access-button">
+                    class="operators-access-button"
+                    type="button">
 
                     <span class="button-code">
                         DATABASE // 01
                     </span>
 
-                    <strong>
-                        OPERADORES
-                    </strong>
+                    <strong>OPERADORES</strong>
 
                     <small>
                         ACCEDER A PERSONAL REGISTRADO
                     </small>
 
-                    <span class="access-arrow">
-                        →
-                    </span>
+                    <span class="access-arrow">→</span>
 
                 </button>
 
@@ -320,14 +302,365 @@
 
         </section>
 
+    </main>
+
+
+    <!-- ==================================================
+         MODULE 02 // INTERACTIVE MAP
+    =================================================== -->
+
+    <main
+        class="command-main module-view"
+        id="mapView"
+        data-module="map"
+        hidden>
+
+        <section class="module-heading">
+
+            <span class="section-code">
+                PARAGON // GEOGRAPHIC SYSTEM
+            </span>
+
+            <h1>MAPA <span>OPERATIVO</span></h1>
+
+            <p>
+                Visor geográfico interactivo.
+                Los marcadores de demostración no representan
+                operaciones ni ubicaciones verificadas.
+            </p>
+
+        </section>
+
+        <section class="module-panel map-panel">
+
+            <div class="module-panel-header">
+
+                <div>
+                    <span class="section-code">GEO // 01</span>
+                    <h2>GEOGRAPHIC OVERVIEW</h2>
+                </div>
+
+                <span class="module-badge">
+                    MAP DATA
+                </span>
+
+            </div>
+
+            <div class="map-toolbar">
+
+                <span>
+                    <span class="online-dot"></span>
+                    MAP INTERFACE
+                </span>
+
+                <span id="mapCoordinates">
+                    PERÚ // VISTA GENERAL
+                </span>
+
+            </div>
+
+            <div
+                id="paragonMap"
+                class="paragon-map"
+                aria-label="Mapa interactivo de Perú">
+            </div>
+
+            <div class="map-footer">
+                <span>BASE MAP: OPENSTREETMAP</span>
+                <span>MARKERS: DEMONSTRATION DATA</span>
+            </div>
+
+        </section>
 
     </main>
 
 
+    <!-- ==================================================
+         MODULE 03 // ACTIVITY LOG
+    =================================================== -->
 
-    <!-- =====================================================
+    <main
+        class="command-main module-view"
+        id="activityView"
+        data-module="activity"
+        hidden>
+
+        <section class="module-heading">
+
+            <span class="section-code">
+                PARAGON // SYSTEM RECORDS
+            </span>
+
+            <h1>ACTIVITY <span>LOG</span></h1>
+
+            <p>
+                Registro local de las interacciones realizadas
+                durante la sesión actual.
+            </p>
+
+        </section>
+
+        <section class="module-panel">
+
+            <div class="module-panel-header">
+
+                <div>
+                    <span class="section-code">LOG // 01</span>
+                    <h2>SESSION ACTIVITY</h2>
+                </div>
+
+                <button
+                    id="clearActivityLog"
+                    class="module-action-button"
+                    type="button">
+                    CLEAR LOG
+                </button>
+
+            </div>
+
+            <div
+                id="activityLog"
+                class="activity-log"
+                aria-live="polite">
+
+                <div class="activity-entry">
+                    <span class="activity-time">SESSION</span>
+                    <span>COMMAND INTERFACE INITIALIZED</span>
+                </div>
+
+            </div>
+
+            <p class="module-note">
+                Este registro es local y temporal.
+                No se envía a un servidor ni constituye
+                una auditoría de seguridad.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==================================================
+         MODULE 04 // DIAGNOSTICS
+    =================================================== -->
+
+    <main
+        class="command-main module-view"
+        id="diagnosticsView"
+        data-module="diagnostics"
+        hidden>
+
+        <section class="module-heading">
+
+            <span class="section-code">
+                PARAGON // SYSTEM MONITOR
+            </span>
+
+            <h1>SYSTEM <span>DIAGNOSTICS</span></h1>
+
+            <p>
+                Comprobaciones básicas del funcionamiento
+                de esta interfaz en el navegador.
+            </p>
+
+        </section>
+
+        <section class="module-panel">
+
+            <div class="module-panel-header">
+                <div>
+                    <span class="section-code">DIAG // 01</span>
+                    <h2>LOCAL SYSTEM CHECKS</h2>
+                </div>
+            </div>
+
+            <div class="diagnostics-grid">
+
+                <article class="diagnostic-card">
+                    <span>01 // JAVASCRIPT</span>
+                    <strong id="diagJavascript">RUNNING</strong>
+                    <small>Interfaz ejecutándose</small>
+                </article>
+
+                <article class="diagnostic-card">
+                    <span>02 // NETWORK</span>
+                    <strong id="diagNetwork">CHECKING</strong>
+                    <small>Estado de conexión del navegador</small>
+                </article>
+
+                <article class="diagnostic-card">
+                    <span>03 // MAP MODULE</span>
+                    <strong id="diagMap">WAITING</strong>
+                    <small>Disponibilidad de Leaflet</small>
+                </article>
+
+                <article class="diagnostic-card">
+                    <span>04 // OPERATOR DATA</span>
+                    <strong id="diagOperators">14 RECORDS</strong>
+                    <small>Registros configurados en la página</small>
+                </article>
+
+            </div>
+
+            <p class="module-note">
+                Estas comprobaciones no verifican cifrado,
+                identidad, servidores privados ni seguridad real.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==================================================
+         MODULE 05 // EQUIPMENT
+    =================================================== -->
+
+    <main
+        class="command-main module-view"
+        id="equipmentView"
+        data-module="equipment"
+        hidden>
+
+        <section class="module-heading">
+
+            <span class="section-code">
+                PARAGON // EQUIPMENT REGISTRY
+            </span>
+
+            <h1>EQUIPMENT <span>DATABASE</span></h1>
+
+            <p>
+                Área destinada al inventario de equipamiento
+                y material registrado.
+            </p>
+
+        </section>
+
+        <section class="module-panel">
+
+            <div class="module-panel-header">
+                <div>
+                    <span class="section-code">EQUIPMENT // 01</span>
+                    <h2>INVENTORY MODULE</h2>
+                </div>
+
+                <span class="module-badge">
+                    PREVIEW
+                </span>
+            </div>
+
+            <div class="empty-module">
+
+                <span class="empty-module-icon">◇</span>
+
+                <h3>INVENTORY AWAITING CONFIGURATION</h3>
+
+                <p>
+                    Este módulo está preparado para incorporar
+                    categorías, fichas, imágenes y estados
+                    del inventario en una fase posterior.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==================================================
+         MODULE 06 // SETTINGS
+    =================================================== -->
+
+    <main
+        class="command-main module-view"
+        id="settingsView"
+        data-module="settings"
+        hidden>
+
+        <section class="module-heading">
+
+            <span class="section-code">
+                PARAGON // INTERFACE CONFIGURATION
+            </span>
+
+            <h1>SYSTEM <span>SETTINGS</span></h1>
+
+            <p>
+                Preferencias visuales y controles locales
+                de la interfaz.
+            </p>
+
+        </section>
+
+        <section class="module-panel">
+
+            <div class="module-panel-header">
+                <div>
+                    <span class="section-code">CONFIG // 01</span>
+                    <h2>INTERFACE PREFERENCES</h2>
+                </div>
+            </div>
+
+            <div class="settings-list">
+
+                <div class="settings-row">
+                    <div>
+                        <strong>INTERFACE SOUND</strong>
+                        <small>
+                            Efectos de sonido de los controles,
+                            si están disponibles.
+                        </small>
+                    </div>
+
+                    <label class="settings-toggle">
+                        <input
+                            type="checkbox"
+                            id="soundToggle"
+                            checked>
+                        <span>ENABLED</span>
+                    </label>
+                </div>
+
+                <div class="settings-row">
+                    <div>
+                        <strong>VISUAL INTERFACE</strong>
+                        <small>
+                            Tema táctico oscuro.
+                        </small>
+                    </div>
+
+                    <span class="settings-value">
+                        DARK // DEFAULT
+                    </span>
+                </div>
+
+                <div class="settings-row">
+                    <div>
+                        <strong>SESSION STORAGE</strong>
+                        <small>
+                            Los registros de actividad se mantienen
+                            únicamente durante esta sesión.
+                        </small>
+                    </div>
+
+                    <span class="settings-value">
+                        LOCAL
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==================================================
          OPERATOR DATABASE MODAL
-    ====================================================== -->
+    =================================================== -->
 
     <div
         id="operatorDatabaseModal"
@@ -335,59 +668,35 @@
 
         <div class="database-overlay"></div>
 
-
         <div class="operator-database">
-
-
-            <!-- DATABASE HEADER -->
 
             <div class="database-header">
 
                 <div>
-
-                    <span>
-                        PARAGON // PERSONNEL DATABASE
-                    </span>
-
-                    <strong>
-                        OPERATOR DATABASE
-                    </strong>
-
+                    <span>PARAGON // PERSONNEL DATABASE</span>
+                    <strong>OPERATOR DATABASE</strong>
                 </div>
-
 
                 <button
                     id="closeDatabase"
                     class="close-database"
-                    aria-label="Cerrar base de datos">
-
+                    aria-label="Cerrar base de datos"
+                    type="button">
                     ×
-
                 </button>
 
             </div>
 
-
-            <!-- DATABASE CONTENT -->
-
             <div class="database-content">
 
                 <div class="database-info">
-
-                    <span>
-                        DATABASE // 01
-                    </span>
-
-                    <strong>
-                        PERSONAL REGISTRADO
-                    </strong>
+                    <span>DATABASE // 01</span>
+                    <strong>PERSONAL REGISTRADO</strong>
 
                     <small>
                         SELECCIONE UN OPERADOR PARA CONSULTAR SU EXPEDIENTE
                     </small>
-
                 </div>
-
 
                 <div
                     id="operatorsGrid"
@@ -396,23 +705,10 @@
 
             </div>
 
-
-            <!-- DATABASE FOOTER -->
-
             <div class="database-footer">
-
-                <span>
-                    PARAGON STRIKE DIVISION
-                </span>
-
-                <span>
-                    CLASSIFIED PERSONNEL DATABASE
-                </span>
-
-                <span>
-                    14 FILES
-                </span>
-
+                <span>PARAGON STRIKE DIVISION</span>
+                <span>CLASSIFIED PERSONNEL DATABASE</span>
+                <span>14 FILES</span>
             </div>
 
         </div>
@@ -420,10 +716,9 @@
     </div>
 
 
-
-    <!-- =====================================================
+    <!-- ==================================================
          OPERATOR FILE MODAL
-    ====================================================== -->
+    =================================================== -->
 
     <div
         id="operatorModal"
@@ -431,31 +726,21 @@
 
         <div class="modal-overlay"></div>
 
-
         <div class="operator-file">
-
 
             <button
                 id="closeModal"
-                class="close-modal">
-
+                class="close-modal"
+                aria-label="Cerrar expediente"
+                type="button">
                 ×
-
             </button>
-
 
             <div class="file-header">
 
                 <div>
-
-                    <span>
-                        PARAGON // PERSONNEL FILE
-                    </span>
-
-                    <strong id="fileCode">
-                        OPERATOR 01
-                    </strong>
-
+                    <span>PARAGON // PERSONNEL FILE</span>
+                    <strong id="fileCode">OPERATOR 01</strong>
                 </div>
 
                 <div
@@ -465,182 +750,105 @@
 
             </div>
 
-
             <div class="file-content">
-
 
                 <!-- PROFILE -->
 
                 <div class="file-profile">
 
                     <div class="profile-image">
-
-                        <span id="profileInitial">
-                            P
-                        </span>
-
-                        <small>
-                            NO IMAGE
-                        </small>
-
+                        <span id="profileInitial">P</span>
+                        <small>NO IMAGE</small>
                     </div>
 
-
                     <div class="profile-name">
-
-                        <span id="profileCodename">
-                            ATLAS
-                        </span>
-
-                        <h2 id="profileName">
-                            Daniel Voss
-                        </h2>
+                        <span id="profileCodename">ATLAS</span>
+                        <h2 id="profileName">Daniel Voss</h2>
 
                         <p id="profileSpecialty">
                             COMMAND / LEADERSHIP
                         </p>
-
                     </div>
 
                 </div>
 
-
-
-                <!-- DATA -->
+                <!-- PERSONAL DATA -->
 
                 <div class="file-data">
 
                     <div class="data-row">
-
                         <span>EDAD</span>
-
                         <strong id="dataAge"></strong>
-
                     </div>
 
-
                     <div class="data-row">
-
                         <span>ALTURA</span>
-
                         <strong id="dataHeight"></strong>
-
                     </div>
 
-
                     <div class="data-row">
-
                         <span>PESO</span>
-
                         <strong id="dataWeight"></strong>
-
                     </div>
 
-
                     <div class="data-row">
-
                         <span>NIVEL</span>
-
                         <strong id="dataLevel"></strong>
-
                     </div>
 
-
                     <div class="data-row">
-
                         <span>CABELLO</span>
-
                         <strong id="dataHair"></strong>
-
                     </div>
 
-
                     <div class="data-row">
-
                         <span>OJOS</span>
-
                         <strong id="dataEyes"></strong>
-
                     </div>
 
                 </div>
 
-
-
-                <!-- STORY -->
+                <!-- HISTORY -->
 
                 <div class="file-section">
-
-                    <span>
-                        HISTORIAL
-                    </span>
-
+                    <span>HISTORIAL</span>
                     <p id="profileHistory"></p>
-
                 </div>
-
-
 
                 <!-- DEPLOYMENTS -->
 
                 <div class="file-section">
-
-                    <span>
-                        DESPLIEGUES CONOCIDOS
-                    </span>
+                    <span>DESPLIEGUES CONOCIDOS</span>
 
                     <div
                         id="deployments"
                         class="tags">
                     </div>
-
                 </div>
-
-
 
                 <!-- OPERATIONS -->
 
                 <div class="file-section">
-
-                    <span>
-                        OPERACIONES
-                    </span>
+                    <span>OPERACIONES</span>
 
                     <div
                         id="operations"
                         class="tags">
                     </div>
-
                 </div>
 
-
-
-                <!-- PROFILE -->
+                <!-- PROFILE DESCRIPTION -->
 
                 <div class="file-section">
-
-                    <span>
-                        PERFIL
-                    </span>
-
+                    <span>PERFIL</span>
                     <p id="profileDescription"></p>
-
                 </div>
-
 
             </div>
 
-
             <div class="file-footer">
-
-                <span>
-                    PARAGON STRIKE DIVISION
-                </span>
-
-                <span>
-                    CLASSIFIED PERSONNEL DATABASE
-                </span>
-
+                <span>PARAGON STRIKE DIVISION</span>
+                <span>CLASSIFIED PERSONNEL DATABASE</span>
             </div>
 
         </div>
@@ -648,9 +856,11 @@
     </div>
 
 
+    <!-- LEAFLET MUST LOAD BEFORE THE MAIN JAVASCRIPT -->
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script src="../js/script.js"></script>
 
 </body>
-
 </html>
