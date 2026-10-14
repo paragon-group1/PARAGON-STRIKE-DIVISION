@@ -1173,4 +1173,334 @@ document.addEventListener(
    ========================================================= */
 
 (() => {
-    "
+    "use strict";
+
+    // Ejecutar únicamente en la interfaz de comandos.
+    if (!document.body.classList.contains("command-page")) {
+        return;
+    }
+
+    const sidebarButtons = document.querySelectorAll(
+        ".sidebar-button[data-view]"
+    );
+
+    const moduleViews = document.querySelectorAll(".module-view");
+    const activityLog = document.getElementById("activityLog");
+    const clearActivityButton = document.getElementById("clearActivityLog");
+    const soundToggle = document.getElementById("soundToggle");
+
+    const mapContainer = document.getElementById("paragonMap");
+    const mapCoordinates = document.getElementById("mapCoordinates");
+
+    let paragonMap = null;
+    let mapInitialized = false;
+
+    /* =====================================================
+       ACTIVITY LOG — SESSION ONLY
+       ===================================================== */
+
+    function addActivity(message) {
+        if (!activityLog) return;
+
+        const entry = document.createElement("div");
+        entry.className = "activity-entry";
+
+        const time = document.createElement("span");
+        time.className = "activity-time";
+        time.textContent = new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+        });
+
+        const description = document.createElement("span");
+        description.textContent = message;
+
+        entry.append(time, description);
+        activityLog.prepend(entry);
+    }
+
+    /* =====================================================
+       MODULE NAVIGATION
+       ===================================================== */
+
+    function showModule(moduleName) {
+        let selectedView = null;
+
+        moduleViews.forEach((view) => {
+            const isSelected = view.dataset.module === moduleName;
+
+            view.hidden = !isSelected;
+            view.classList.toggle("active", isSelected);
+
+            if (isSelected) {
+                selectedView = view;
+            }
+        });
+
+        sidebarButtons.forEach((button) => {
+            const isSelected = button.dataset.view === moduleName;
+
+            button.classList.toggle("active", isSelected);
+
+            if (isSelected) {
+                button.setAttribute("aria-current", "page");
+            } else {
+                button.removeAttribute("aria-current");
+            }
+        });
+
+        if (!selectedView) {
+            console.warn(
+                "PARAGON: module not found:",
+                moduleName
+            );
+            return;
+        }
+
+        addActivity("MODULE OPENED: " + moduleName.toUpperCase());
+
+        if (moduleName === "map") {
+            initializeMap();
+
+            window.setTimeout(() => {
+                if (paragonMap) {
+                    paragonMap.invalidateSize();
+                }
+            }, 150);
+        }
+    }
+
+    sidebarButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            showModule(button.dataset.view);
+        });
+    });
+
+    /* =====================================================
+       OPERATORS DATABASE
+       Preserve existing database behavior.
+       ===================================================== */
+
+    const operatorsButton = document.getElementById("navOperators");
+
+    if (operatorsButton) {
+        operatorsButton.addEventListener("click", () => {
+            addActivity("OPERATORS DATABASE REQUESTED.");
+        });
+    }
+
+    /* =====================================================
+       MAP — LEAFLET + OPENSTREETMAP
+       Demonstration markers only.
+       ===================================================== */
+
+    function initializeMap() {
+        if (mapInitialized || !mapContainer) return;
+
+        if (typeof L === "undefined") {
+            if (mapCoordinates) {
+                mapCoordinates.textContent =
+                    "MAP LIBRARY UNAVAILABLE — CHECK INTERNET CONNECTION";
+            }
+
+            updateDiagnostic(
+                "diagMap",
+                "UNAVAILABLE",
+                "Leaflet could not be loaded."
+            );
+
+            return;
+        }
+
+        try {
+            paragonMap = L.map(mapContainer, {
+                scrollWheelZoom: true
+            }).setView([-9.19, -75.0152], 5);
+
+            L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+                    attribution:
+                        '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>',
+                    maxZoom: 19
+                }
+            ).addTo(paragonMap);
+
+            const demoLocations = [
+                {
+                    name: "Lima",
+                    coordinates: [-12.0464, -77.0428]
+                },
+                {
+                    name: "Juliaca",
+                    coordinates: [-15.4997, -70.1333]
+                }
+            ];
+
+            demoLocations.forEach((location) => {
+                L.marker(location.coordinates)
+                    .addTo(paragonMap)
+                    .bindPopup(
+                        "<strong>" + location.name + "</strong>" +
+                        "<br>Marcador de demostración." +
+                        "<br>No representa una operación real."
+                    );
+            });
+
+            paragonMap.on("click", (event) => {
+                if (mapCoordinates) {
+                    mapCoordinates.textContent =
+                        "LAT " + event.latlng.lat.toFixed(4) +
+                        " / LNG " + event.latlng.lng.toFixed(4);
+                }
+            });
+
+            mapInitialized = true;
+
+            if (mapCoordinates) {
+                mapCoordinates.textContent =
+                    "MAP CENTER: PERU / DEMONSTRATION MODE";
+            }
+
+            updateDiagnostic(
+                "diagMap",
+                "INITIALIZED",
+                "Map created; demonstration markers only."
+            );
+
+            addActivity("MAP INITIALIZED — DEMONSTRATION MODE.");
+
+        } catch (error) {
+            console.error("PARAGON map error:", error);
+
+            updateDiagnostic(
+                "diagMap",
+                "ERROR",
+                "The map could not be initialized."
+            );
+
+            if (mapCoordinates) {
+                mapCoordinates.textContent =
+                    "MAP ERROR — CHECK CONSOLE AND CONNECTION";
+            }
+        }
+    }
+
+    /* =====================================================
+       DIAGNOSTICS
+       Browser checks only, not security certification.
+       ===================================================== */
+
+    function updateDiagnostic(id, value, description) {
+        const element = document.getElementById(id);
+        if (!element) return;
+
+        element.textContent = value;
+
+        const card = element.closest(".diagnostic-card");
+        const note = card ? card.querySelector("small") : null;
+
+        if (note && description) {
+            note.textContent = description;
+        }
+    }
+
+    function updateNetworkStatus() {
+        const online = navigator.onLine;
+
+        updateDiagnostic(
+            "diagNetwork",
+            online ? "ONLINE" : "OFFLINE",
+            online
+                ? "The browser reports an internet connection."
+                : "The browser reports no internet connection."
+        );
+
+        const sidebarStatus = document.getElementById(
+            "sidebarConnectionStatus"
+        );
+
+        if (sidebarStatus) {
+            sidebarStatus.textContent = online
+                ? "BROWSER ONLINE"
+                : "BROWSER OFFLINE";
+        }
+    }
+
+    updateDiagnostic(
+        "diagJavascript",
+        "ACTIVE",
+        "The command interface JavaScript is running."
+    );
+
+    updateNetworkStatus();
+
+    updateDiagnostic(
+        "diagMap",
+        typeof L !== "undefined" ? "LIBRARY READY" : "UNAVAILABLE",
+        typeof L !== "undefined"
+            ? "Leaflet library detected; map initializes when opened."
+            : "Leaflet library was not detected."
+    );
+
+    let operatorCount = "UNVERIFIED";
+
+    if (typeof operators !== "undefined" && Array.isArray(operators)) {
+        operatorCount = operators.length + " RECORDS";
+    }
+
+    updateDiagnostic(
+        "diagOperators",
+        operatorCount,
+        operatorCount === "UNVERIFIED"
+            ? "Could not verify the operator array."
+            : "Records found in the existing JavaScript array."
+    );
+
+    window.addEventListener("online", updateNetworkStatus);
+    window.addEventListener("offline", updateNetworkStatus);
+
+    /* =====================================================
+       CLEAR ACTIVITY LOG
+       ===================================================== */
+
+    if (clearActivityButton) {
+        clearActivityButton.addEventListener("click", () => {
+            if (activityLog) {
+                activityLog.replaceChildren();
+            }
+
+            addActivity("ACTIVITY LOG CLEARED.");
+        });
+    }
+
+    /* =====================================================
+       OPTIONAL UI CLICK SOUND
+       Does not replace the welcome audio.
+       ===================================================== */
+
+    document.addEventListener("click", (event) => {
+        const clickedButton = event.target.closest("button");
+
+        if (!clickedButton || !soundToggle || !soundToggle.checked) {
+            return;
+        }
+
+        const clickSound = new Audio("../sounds/ui-click.mp3");
+        clickSound.volume = 0.22;
+
+        clickSound.play().catch(() => {
+            // The browser may block audio playback.
+        });
+    });
+
+    /* =====================================================
+       INITIAL STATE
+       ===================================================== */
+
+    addActivity("COMMAND INTERFACE INITIALIZED.");
+    showModule("command");
+
+})();
+```
