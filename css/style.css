@@ -2555,5 +2555,902 @@ body {
         gap: 8px;
 
     }
+   
 
 }
+
+/* =========================================================
+   PARAGON STRIKE DIVISION
+   COMMAND SIDEBAR + MODULE INTERFACE
+   ADDITIONAL STYLES
+========================================================= */
+
+/* ---------- SIDEBAR ---------- */
+
+.command-sidebar {
+    position: fixed;
+    top: 82px;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+
+    width: 238px;
+    padding: 25px 14px 16px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    background: rgba(5, 8, 9, .97);
+    border-right: 1px solid var(--line);
+    backdrop-filter: blur(14px);
+}
+
+.sidebar-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 0 10px;
+    margin-bottom: 12px;
+}
+
+.sidebar-heading-secondary {
+    margin-top: 30px;
+}
+
+.sidebar-label {
+    color: var(--gray-dark);
+    font-family: Orbitron, sans-serif;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+}
+
+.sidebar-line {
+    height: 1px;
+    flex: 1;
+    background: var(--line);
+}
+
+.sidebar-button {
+    position: relative;
+
+    width: 100%;
+    min-height: 46px;
+    padding: 0 12px;
+    margin: 2px 0;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    color: var(--gray);
+    background: transparent;
+    border: 1px solid transparent;
+
+    text-align: left;
+    font-family: Orbitron, sans-serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+    transition:
+        background .2s ease,
+        color .2s ease,
+        border-color .2s ease;
+}
+
+.sidebar-button:hover {
+    color: var(--white);
+    background: rgba(255, 255, 255, .035);
+    border-color: var(--line);
+}
+
+.sidebar-button.active {
+    color: var(--white);
+    background: rgba(143, 169, 154, .09);
+    border-color: rgba(143, 169, 154, .25);
+}
+
+.sidebar-icon {
+    width: 22px;
+    flex-shrink: 0;
+
+    color: var(--gray);
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+.sidebar-button.active .sidebar-icon {
+    color: var(--green);
+}
+
+.sidebar-text {
+    flex: 1;
+    white-space: nowrap;
+}
+
+.sidebar-indicator {
+    width: 3px;
+    height: 18px;
+
+    position: absolute;
+    top: 50%;
+    right: 0;
+
+    transform: translateY(-50%);
+    background: transparent;
+}
+
+.sidebar-button.active .sidebar-indicator {
+    background: var(--green);
+    box-shadow: 0 0 10px rgba(143, 169, 154, .25);
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding-top: 25px;
+}
+
+.sidebar-connection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 15px 9px;
+    margin-bottom: 14px;
+
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, .015);
+}
+
+.sidebar-connection .online-dot {
+    flex-shrink: 0;
+}
+
+.sidebar-connection strong,
+.sidebar-connection small {
+    display: block;
+}
+
+.sidebar-connection strong {
+    font-family: Orbitron, sans-serif;
+    font-size: 8px;
+    letter-spacing: .7px;
+}
+
+.sidebar-connection small {
+    margin-top: 5px;
+    color: var(--gray);
+    font-size: 8px;
+}
+
+.sidebar-version {
+    padding: 20px 8px 5px;
+
+    color: var(--gray-dark);
+    font-family: Orbitron, sans-serif;
+    font-size: 7px;
+    line-height: 1.8;
+    letter-spacing: 1px;
+}
+
+.sidebar-version span {
+    display: block;
+    font-size: 7px;
+}
+
+
+/* ---------- MAIN CONTENT POSITION ---------- */
+
+.command-page .command-main {
+    width: auto;
+    max-width: 1400px;
+
+    margin-left: 238px;
+    margin-right: 0;
+
+    padding-left: clamp(22px, 3vw, 48px);
+    padding-right: clamp(22px, 3vw, 48px);
+}
+
+.command-page .command-hero {
+    gap: 30px;
+}
+
+.command-page .hero-system {
+    max-width: 45%;
+    gap: 12px;
+}
+
+.command-page .system-circle {
+    width: min(34vw, 360px);
+    height: min(34vw, 360px);
+}
+
+.command-page .system-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* ---------- MODULE VISIBILITY ---------- */
+
+.module-view[hidden] {
+    display: none !important;
+}
+
+.module-view.active {
+    display: block;
+}
+
+.module-view {
+    min-height: calc(100vh - 82px);
+    padding-bottom: 60px;
+}
+
+.module-heading {
+    padding: 58px 0 35px;
+    border-bottom: 1px solid var(--line);
+}
+
+.module-heading h1 {
+    margin-top: 18px;
+
+    font-family: Orbitron, sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1.2;
+    letter-spacing: 2px;
+}
+
+.module-heading h1 span {
+    color: var(--gray);
+}
+
+.module-heading p {
+    max-width: 680px;
+    margin-top: 18px;
+
+    color: var(--gray);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+
+/* ---------- MODULE PANELS ---------- */
+
+.module-panel {
+    margin-top: 30px;
+
+    border: 1px solid var(--line);
+    background: rgba(9, 12, 13, .88);
+}
+
+.module-panel-header {
+    min-height: 86px;
+    padding: 20px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.module-panel-header h2 {
+    margin-top: 9px;
+
+    font-family: Orbitron, sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+}
+
+.module-badge {
+    padding: 8px 10px;
+
+    color: var(--green);
+    border: 1px solid rgba(143, 169, 154, .25);
+
+    font-family: Orbitron, sans-serif;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.module-action-button {
+    padding: 11px 14px;
+
+    color: var(--gray);
+    background: transparent;
+    border: 1px solid var(--line-light);
+
+    font-family: Orbitron, sans-serif;
+    font-size: 8px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.module-action-button:hover {
+    color: var(--white);
+    border-color: var(--green);
+}
+
+
+/* ---------- MAP ---------- */
+
+.map-toolbar,
+.map-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    padding: 14px 20px;
+
+    color: var(--gray);
+    font-family: Orbitron, sans-serif;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.map-toolbar {
+    border-bottom: 1px solid var(--line);
+}
+
+.map-toolbar > span:first-child {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.map-toolbar .online-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+}
+
+.paragon-map {
+    width: 100%;
+    height: 500px;
+    min-height: 300px;
+
+    background: #101719;
+    z-index: 1;
+}
+
+.map-footer {
+    border-top: 1px solid var(--line);
+    font-size: 7px;
+}
+
+.paragon-map .leaflet-control-attribution {
+    font-family: Inter, sans-serif;
+    font-size: 9px;
+}
+
+.paragon-map .leaflet-control-zoom a {
+    color: #e8eceb;
+    background: #0b0e10;
+    border-color: #343b3d;
+}
+
+.paragon-map .leaflet-control-zoom a:hover {
+    background: #202729;
+}
+
+
+/* ---------- ACTIVITY LOG ---------- */
+
+.activity-log {
+    min-height: 150px;
+    max-height: 480px;
+    padding: 10px 24px;
+    overflow-y: auto;
+}
+
+.activity-entry {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+
+    padding: 17px 0;
+    border-bottom: 1px solid var(--line);
+
+    color: var(--gray);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.activity-time {
+    min-width: 70px;
+
+    color: var(--green);
+    font-family: Orbitron, sans-serif;
+    font-size: 8px;
+    letter-spacing: .5px;
+}
+
+.module-note {
+    padding: 18px 24px;
+
+    color: var(--gray-dark);
+    font-size: 10px;
+    line-height: 1.7;
+
+    border-top: 1px solid var(--line);
+}
+
+
+/* ---------- DIAGNOSTICS ---------- */
+
+.diagnostics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+
+    padding: 24px;
+}
+
+.diagnostic-card {
+    min-height: 130px;
+    padding: 20px;
+
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, .015);
+}
+
+.diagnostic-card > span,
+.diagnostic-card > strong,
+.diagnostic-card > small {
+    display: block;
+}
+
+.diagnostic-card > span {
+    color: var(--gray-dark);
+    font-family: Orbitron, sans-serif;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+.diagnostic-card > strong {
+    margin-top: 20px;
+
+    color: var(--green);
+    font-family: Orbitron, sans-serif;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.diagnostic-card > small {
+    margin-top: 8px;
+    color: var(--gray);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* ---------- EQUIPMENT EMPTY STATE ---------- */
+
+.empty-module {
+    min-height: 300px;
+    padding: 45px 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.empty-module-icon {
+    color: var(--green);
+    font-size: 42px;
+}
+
+.empty-module h3 {
+    margin-top: 22px;
+
+    font-family: Orbitron, sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.empty-module p {
+    max-width: 470px;
+    margin-top: 15px;
+
+    color: var(--gray);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+
+/* ---------- SETTINGS ---------- */
+
+.settings-list {
+    padding: 0 24px;
+}
+
+.settings-row {
+    min-height: 95px;
+    padding: 20px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.settings-row:last-child {
+    border-bottom: 0;
+}
+
+.settings-row strong,
+.settings-row small {
+    display: block;
+}
+
+.settings-row strong {
+    font-family: Orbitron, sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.settings-row small {
+    max-width: 500px;
+    margin-top: 8px;
+
+    color: var(--gray);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.settings-value {
+    color: var(--green);
+    font-family: Orbitron, sans-serif;
+    font-size: 8px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.settings-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--green);
+    font-family: Orbitron, sans-serif;
+    font-size: 8px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+}
+
+.settings-toggle input {
+    accent-color: var(--green);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+
+/* ---------- ACCESSIBILITY ---------- */
+
+.sidebar-button:focus-visible,
+.module-action-button:focus-visible,
+.settings-toggle input:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+}
+
+
+/* ---------- TABLET ---------- */
+
+@media (max-width: 1000px) {
+
+    .command-sidebar {
+        width: 205px;
+    }
+
+    .command-page .command-main {
+        margin-left: 205px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .command-page .command-hero {
+        min-height: 360px;
+    }
+
+    .command-page .hero-system {
+        max-width: 40%;
+    }
+
+    .command-page .system-circle {
+        width: 180px;
+        height: 180px;
+    }
+
+    .command-page .overview-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .command-page .overview-card:nth-child(2) {
+        border-right: 0;
+    }
+
+    .command-page .overview-card:nth-child(-n+2) {
+        border-bottom: 1px solid var(--line);
+    }
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 700px) {
+
+    .command-header {
+        min-height: 72px;
+        padding: 12px 16px;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+    }
+
+    .command-center {
+        display: none;
+    }
+
+    .command-brand {
+        gap: 9px;
+    }
+
+    .command-brand strong {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+
+    .command-brand span {
+        font-size: 7px;
+        letter-spacing: 1.5px;
+    }
+
+    .command-brand .brand-mark {
+        width: 32px;
+        height: 32px;
+    }
+
+    .system-status strong {
+        font-size: 8px;
+    }
+
+    .command-sidebar {
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        z-index: 21;
+
+        width: 100%;
+        height: auto;
+        padding: 10px;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .sidebar-heading,
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .sidebar-button {
+        width: auto;
+        min-width: max-content;
+        min-height: 40px;
+
+        margin: 0;
+        padding: 0 11px;
+        gap: 7px;
+
+        font-size: 8px;
+    }
+
+    .sidebar-icon {
+        width: auto;
+        font-size: 16px;
+    }
+
+    .sidebar-text {
+        flex: 0 0 auto;
+    }
+
+    .sidebar-indicator {
+        width: auto;
+        height: 2px;
+
+        top: auto;
+        right: 8px;
+        bottom: 0;
+        left: 8px;
+
+        transform: none;
+    }
+
+    .command-page .command-main {
+        width: 100%;
+        margin: 0;
+        padding: 0 18px 40px;
+    }
+
+    .command-page .command-hero {
+        min-height: auto;
+        padding: 55px 0 35px;
+
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+    }
+
+    .command-page .command-hero h1 {
+        font-size: clamp(30px, 8vw, 45px);
+    }
+
+    .command-page .command-hero p {
+        font-size: 12px;
+    }
+
+    .command-page .hero-system {
+        max-width: 100%;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .command-page .system-circle {
+        width: 110px;
+        height: 110px;
+    }
+
+    .command-page .system-circle img {
+        width: 110px;
+        height: 110px;
+    }
+
+    .command-page .overview-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .command-page .overview-card {
+        min-width: 0;
+        padding: 18px 12px;
+        min-height: 155px;
+    }
+
+    .command-page .overview-card small {
+        font-size: 7px;
+        letter-spacing: 1px;
+        overflow-wrap: anywhere;
+    }
+
+    .command-page .overview-card strong {
+        font-size: 23px;
+    }
+
+    .command-page .card-status {
+        font-size: 7px;
+        line-height: 1.5;
+    }
+
+    .command-page .operators-section {
+        padding: 45px 0;
+    }
+
+    .command-page .section-heading {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+    }
+
+    .module-heading {
+        padding: 38px 0 25px;
+    }
+
+    .module-heading h1 {
+        font-size: clamp(25px, 7vw, 36px);
+    }
+
+    .module-panel {
+        margin-top: 20px;
+    }
+
+    .module-panel-header {
+        padding: 17px;
+        min-height: 75px;
+    }
+
+    .module-panel-header h2 {
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+    .paragon-map {
+        height: 390px;
+        min-height: 300px;
+    }
+
+    .map-toolbar,
+    .map-footer {
+        padding: 12px;
+        font-size: 7px;
+    }
+
+    .diagnostics-grid {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+
+    .settings-list {
+        padding: 0 16px;
+    }
+
+    .settings-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .activity-entry {
+        gap: 10px;
+        font-size: 10px;
+    }
+
+    .activity-time {
+        min-width: 58px;
+    }
+}
+
+
+/* ---------- SMALL MOBILE ---------- */
+
+@media (max-width: 380px) {
+
+    .system-status {
+        gap: 6px;
+    }
+
+    .system-status small {
+        font-size: 7px;
+    }
+
+    .command-page .overview-card {
+        padding: 15px 9px;
+    }
+
+    .sidebar-button {
+        padding: 0 9px;
+    }
+
+    .sidebar-text {
+        font-size: 7px;
+    }
+
+}
+
