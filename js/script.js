@@ -1224,3 +1224,67 @@ document.addEventListener(
     showModule("command");
 })();
 
+/* ==========================================
+   PARAGON STRIKE DIVISION
+   OPERATIONAL MAP + INTERFACE SOUND
+========================================== */
+
+function initializeParagonModules() {
+  // MAPA OPERATIVO
+  const mapElement = document.getElementById("paragonMap");
+
+  if (mapElement && window.L && !mapElement._leaflet_id) {
+    const map = L.map(mapElement).setView([-9.19, -75.0152], 5);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19
+    }).addTo(map);
+
+    // Permite corregir el tamaño si el mapa estaba oculto
+    // al inicializarse.
+    setTimeout(() => map.invalidateSize(), 300);
+  }
+
+  // SONIDO DE INTERFAZ
+  const soundToggle = document.getElementById("soundToggle");
+
+  if (soundToggle && !soundToggle.dataset.soundInitialized) {
+    soundToggle.dataset.soundInitialized = "true";
+
+    const clickSound = new Audio(
+      "https://paragon-group1.github.io/PARAGON-STRIKE-DIVISION/sounds/ui-click.mp3"
+    );
+
+    clickSound.preload = "auto";
+    let soundEnabled = true;
+
+    soundToggle.setAttribute("aria-pressed", "true");
+
+    soundToggle.addEventListener("click", () => {
+      soundEnabled = !soundEnabled;
+      soundToggle.setAttribute("aria-pressed", String(soundEnabled));
+      soundToggle.dataset.enabled = String(soundEnabled);
+    });
+
+    // Reproduce el efecto al usar controles de la interfaz,
+    // excepto el propio interruptor de sonido.
+    document.addEventListener("click", (event) => {
+      const control = event.target.closest(
+        "button, a, [role='button']"
+      );
+
+      if (!soundEnabled || !control || control === soundToggle) return;
+
+      clickSound.currentTime = 0;
+      clickSound.play().catch(() => {});
+    });
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeParagonModules);
+} else {
+  initializeParagonModules();
+}
+
