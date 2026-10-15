@@ -637,18 +637,16 @@ function activateModule(moduleName) {
 
     let moduleFound = false;
 
-```javascript
-moduleViews.forEach(view => {
-    const isActive = view.dataset.module === moduleName;
+    moduleViews.forEach(view => {
+        const isActive = view.dataset.module === moduleName;
 
-    view.classList.toggle("active", isActive);
-    view.hidden = !isActive;
+        view.classList.toggle("active", isActive);
+        view.hidden = !isActive;
 
-    if (isActive) {
-        moduleFound = true;
-    }
-});
-```
+        if (isActive) {
+            moduleFound = true;
+        }
+    });
 
     sidebarButtons.forEach(button => {
         const isActive = button.dataset.view === moduleName;
@@ -661,15 +659,18 @@ moduleViews.forEach(view => {
             button.removeAttribute("aria-current");
         }
     });
-console.log("MÓDULO SOLICITADO:", moduleName);
-console.log("MÓDULO ENCONTRADO:", moduleFound);
+
+    console.log("MÓDULO SOLICITADO:", moduleName);
+    console.log("MÓDULO ENCONTRADO:", moduleFound);
+
     if (!moduleFound) return;
 
-    window.paragonLogActivity(
-        `MODULE ACCESSED // ${moduleName.toUpperCase()}`
-    );
+    if (typeof window.paragonLogActivity === "function") {
+        window.paragonLogActivity(
+            `MODULE ACCESSED // ${moduleName.toUpperCase()}`
+        );
+    }
 
-    // Actualizar el mapa al mostrar su módulo.
     if (moduleName === "map" && window.paragonMap) {
         requestAnimationFrame(() => {
             window.paragonMap.invalidateSize();
@@ -680,8 +681,10 @@ console.log("MÓDULO ENCONTRADO:", moduleFound);
         }, 200);
     }
 
-    // Actualizar diagnósticos cuando se abre el módulo.
-    if (moduleName === "diagnostics") {
+    if (
+        moduleName === "diagnostics" &&
+        typeof runDiagnostics === "function"
+    ) {
         runDiagnostics();
     }
 }
