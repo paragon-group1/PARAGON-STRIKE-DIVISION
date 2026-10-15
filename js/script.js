@@ -1225,6 +1225,7 @@ document.addEventListener(
 })();
 
 
+```javascript
 /* ==========================================
    PARAGON STRIKE DIVISION
    OPERATIONAL MAP + INTERFACE SOUND
@@ -1233,125 +1234,149 @@ document.addEventListener(
 (() => {
     "use strict";
 
-    // Ejecutar solamente en la página de mando.
-    if (!document.body.classList.contains("command-page")) {
-        return;
-    }
+    function initializeParagonModules() {
 
-    /* ==========================================
-       MAPA OPERATIVO
-    ========================================== */
+        /* ==========================================
+           MAPA OPERATIVO
+        ========================================== */
 
-    let paragonMap = null;
-
-    function initializeMap() {
         const mapElement = document.getElementById("paragonMap");
 
-        if (!mapElement || !window.L || paragonMap) {
+        if (mapElement && window.L && !mapElement._leaflet_id) {
+
+            const map = L.map(mapElement).setView(
+                [-9.19, -75.0152],
+                5
+            );
+
+            L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+                    attribution:
+                        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                    maxZoom: 19
+                }
+            ).addTo(map);
+
+            // Guardar una referencia al mapa operativo.
+            window.paragonOperationalMap = map;
+
+            // Corregir el tamaño cuando se abre el módulo del mapa.
+            document.querySelectorAll(
+                '.sidebar-button[data-view="map"]'
+            ).forEach(button => {
+
+                button.addEventListener("click", () => {
+
+                    requestAnimationFrame(() => {
+                        map.invalidateSize();
+                    });
+
+                    // Segundo ajuste para pantallas que tardan en mostrarse.
+                    setTimeout(() => {
+                        map.invalidateSize();
+                    }, 250);
+
+                });
+
+            });
+
+            // Ajuste inicial.
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 300);
+
+        } else if (mapElement && !window.L) {
+
+            console.error(
+                "PARAGON: Leaflet no se ha cargado. Revisa la conexión."
+            );
+
+        }
+
+
+        /* ==========================================
+           SONIDO DE INTERFAZ
+        ========================================== */
+
+        const soundToggle = document.getElementById("soundToggle");
+
+        if (!soundToggle || soundToggle.dataset.soundInitialized) {
             return;
         }
 
-        paragonMap = L.map(mapElement).setView([-9.19, -75.0152], 5);
+        soundToggle.dataset.soundInitialized = "true";
 
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-            maxZoom: 19
-        }).addTo(paragonMap);
-
-        setTimeout(() => {
-            paragonMap.invalidateSize();
-        }, 300);
-    }
-
-    // Esperar a que Leaflet esté disponible.
-    function waitForLeaflet() {
-        if (window.L) {
-            initializeMap();
-            return;
-        }
-
-        const leafletScript = document.querySelector(
-            'script[src*="leaflet"]'
+        const clickSound = new Audio(
+            "https://paragon-group1.github.io/PARAGON-STRIKE-DIVISION/sounds/ui-click.mp3"
         );
 
-        if (leafletScript) {
-            leafletScript.addEventListener(
-                "load",
-                initializeMap,
-                { once: true }
-            );
+        clickSound.preload = "auto";
+
+        // Reproducir el sonido solo si la casilla está activada.
+        function playInterfaceSound() {
+
+            if (!soundToggle.checked) {
+                return;
+            }
+
+            clickSound.currentTime = 0;
+
+            clickSound.play().catch(() => {
+                // Evitar errores si el navegador bloquea la reproducción.
+            });
+
         }
+
+        // Efecto de sonido para los botones y enlaces de la interfaz.
+        document.addEventListener("click", event => {
+
+            const target = event.target;
+
+            if (!(target instanceof Element)) {
+                return;
+            }
+
+            const control = target.closest(
+                "button, a, [role='button']"
+            );
+
+            if (!control) {
+                return;
+            }
+
+            // No reproducir el sonido al pulsar el propio control de sonido.
+            if (
+                control === soundToggle ||
+                control.contains(soundToggle)
+            ) {
+                return;
+            }
+
+            playInterfaceSound();
+
+        });
+
     }
 
-    waitForLeaflet();
 
     /* ==========================================
-       SONIDO DE INTERFAZ
+       INICIALIZACIÓN SEGURA
     ========================================== */
 
-    const soundToggle = document.getElementById("soundToggle");
+    if (document.readyState === "loading") {
 
-    if (!soundToggle) {
-        return;
-    }
-
-    const clickSound = new Audio(
-        "https://paragon-group1.github.io/PARAGON-STRIKE-DIVISION/sounds/ui-click.mp3"
-    );
-
-    clickSound.preload = "auto";
-
-    let soundEnabled = soundToggle.checked !== undefined
-        ? soundToggle.checked
-        : true;
-
-    // Si el control es una casilla, respetar su estado.
-    if (soundToggle.type === "checkbox") {
-        soundEnabled = soundToggle.checked;
-    }
-
-    function updateSoundState() {
-        soundToggle.setAttribute(
-            "aria-pressed",
-            String(soundEnabled)
+        document.addEventListener(
+            "DOMContentLoaded",
+            initializeParagonModules,
+            { once: true }
         );
 
-        soundToggle.dataset.enabled = String(soundEnabled);
-    }
-
-    updateSoundState();
-
-    function toggleSound() {
-        if (soundToggle.type === "checkbox") {
-            soundEnabled = soundToggle.checked;
-        } else {
-            soundEnabled = !soundEnabled;
-        }
-
-        updateSoundState();
-    }
-
-    if (soundToggle.type === "checkbox") {
-        soundToggle.addEventListener("change", () => {
-            soundEnabled = soundToggle.checked;
-            updateSoundState();
-        });
     } else {
-        soundToggle.addEventListener("click", toggleSound);
+
+        initializeParagonModules();
+
     }
 
-    // Efectos de clic de la interfaz, sin modificar
-    // el audio de bienvenida.
-    document.addEventListener("click", (event) => {
-        const control = event.target.closest(
-            "button, a, [role='button']"
-        );
-
-        if (!soundEnabled || !control || control === soundToggle) {
-            return;
-        }
-
-        clickSound.currentTime = 0;
-        clickSound.play().catch(() => {});
-    });
 })();
+```
