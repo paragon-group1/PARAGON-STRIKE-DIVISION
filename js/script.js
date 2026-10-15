@@ -661,7 +661,8 @@ moduleViews.forEach(view => {
             button.removeAttribute("aria-current");
         }
     });
-
+console.log("MÓDULO SOLICITADO:", moduleName);
+console.log("MÓDULO ENCONTRADO:", moduleFound);
     if (!moduleFound) return;
 
     window.paragonLogActivity(
