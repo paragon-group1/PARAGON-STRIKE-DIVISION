@@ -637,15 +637,18 @@ function activateModule(moduleName) {
 
     let moduleFound = false;
 
-    moduleViews.forEach(view => {
-        const isActive = view.dataset.module === moduleName;
+```javascript
+moduleViews.forEach(view => {
+    const isActive = view.dataset.module === moduleName;
 
-        view.classList.toggle("active", isActive);
+    view.classList.toggle("active", isActive);
+    view.hidden = !isActive;
 
-        if (isActive) {
-            moduleFound = true;
-        }
-    });
+    if (isActive) {
+        moduleFound = true;
+    }
+});
+```
 
     sidebarButtons.forEach(button => {
         const isActive = button.dataset.view === moduleName;
