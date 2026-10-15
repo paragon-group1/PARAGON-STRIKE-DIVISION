@@ -1166,3 +1166,61 @@ document.addEventListener(
 
     }
 );
+
+/* =========================================================
+   PARAGON STRIKE DIVISION
+   SAFE COMMAND MODULE NAVIGATION
+   ========================================================= */
+
+(() => {
+    "use strict";
+
+    // No intervenir en el SYSTEM BOOT.
+    if (!document.body.classList.contains("command-page")) {
+        return;
+    }
+
+    const buttons = document.querySelectorAll(
+        ".sidebar-button[data-view]"
+    );
+
+    const modules = document.querySelectorAll(".module-view");
+
+    function showModule(name) {
+        const target = Array.from(modules).find(
+            module => module.dataset.module === name
+        );
+
+        // No ocultar la pantalla actual si el módulo no existe.
+        if (!target) {
+            console.warn("PARAGON: módulo no encontrado:", name);
+            return;
+        }
+
+        modules.forEach(module => {
+            const selected = module === target;
+            module.hidden = !selected;
+            module.classList.toggle("active", selected);
+        });
+
+        buttons.forEach(button => {
+            const selected = button.dataset.view === name;
+            button.classList.toggle("active", selected);
+
+            if (selected) {
+                button.setAttribute("aria-current", "page");
+            } else {
+                button.removeAttribute("aria-current");
+            }
+        });
+    }
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            showModule(button.dataset.view);
+        });
+    });
+
+    showModule("command");
+})();
+
