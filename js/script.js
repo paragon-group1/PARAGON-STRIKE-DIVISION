@@ -743,43 +743,70 @@ if (clearActivityLog) {
    3. TACTICAL MAP // LEAFLET
 ========================================================= */
 
-const mapElement = document.getElementById("paragonMap");
+function initializeParagonMap() {
+    const mapElement = document.getElementById("paragonMap");
 
-if (
-    mapElement &&
-    typeof L !== "undefined" &&
-    !window.paragonMap
-) {
-    try {
-        const map = L.map(mapElement, {
-            center: [-9.19, -75.0152],
-            zoom: 5,
-            zoomControl: false,
-            attributionControl: true
-        });
-
-        L.tileLayer(
-            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            {
-                maxZoom: 19,
-                attribution: "&copy; OpenStreetMap contributors"
-            }
-        ).addTo(map);
-
-        L.control.zoom({
-            position: "bottomright"
-        }).addTo(map);
-
-        window.paragonMap = map;
-
-        window.paragonLogActivity(
-            "TACTICAL MAP INITIALIZED"
-        );
-    } catch (error) {
-        console.error("PARAGON MAP ERROR:", error);
+    if (!mapElement) {
+        console.warn("PARAGON MAP: container not found.");
+        return;
     }
+
+    if (typeof L === "undefined") {
+        console.error("PARAGON MAP: Leaflet library not loaded.");
+        mapElement.innerHTML =
+            '<div style="padding:20px;color:#e8eceb;">MAP OFFLINE // LEAFLET NOT LOADED</div>';
+        return;
+    }
+
+    if (!window.paragonMap) {
+        try {
+            window.paragonMap = L.map(mapElement, {
+                center: [-9.19, -75.0152],
+                zoom: 5,
+                zoomControl: false,
+                attributionControl: true
+            });
+
+            L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+                    maxZoom: 19,
+                    attribution: "&copy; OpenStreetMap contributors"
+                }
+            ).addTo(window.paragonMap);
+
+            L.control.zoom({
+                position: "bottomright"
+            }).addTo(window.paragonMap);
+
+            window.paragonMap.on("tileerror", function () {
+                console.warn("PARAGON MAP: a map tile could not load.");
+            });
+
+            if (typeof window.paragonLogActivity === "function") {
+                window.paragonLogActivity("TACTICAL MAP INITIALIZED");
+            }
+        } catch (error) {
+            console.error("PARAGON MAP ERROR:", error);
+            return;
+        }
+    }
+
+    requestAnimationFrame(() => {
+        window.paragonMap.invalidateSize();
+    });
+
+    setTimeout(() => {
+        window.paragonMap.invalidateSize();
+    }, 300);
 }
 
+// Inicializar cuando el documento esté listo.
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeParagonMap);
+} else {
+    initializeParagonMap();
+}
 /* =========================================================
    4. SYSTEM DIAGNOSTICS
 ========================================================= */
