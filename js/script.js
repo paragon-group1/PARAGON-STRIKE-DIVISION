@@ -968,24 +968,70 @@ if (document.body.classList.contains("command-page")) {
  * y verificada.
  */
 
-const archiveEntries = [
-    /*
-    EJEMPLO DE ESTRUCTURA PARA UN EXPEDIENTE REAL:
 
+const archiveEntries = [
     {
-        code: "OPS-2026-001",
-        title: "Título del expediente",
+        code: "REG-PEND-001",
+        title: "BLACK VECTOR",
         category: "operacion",
-        date: "2026-01-15",
-        status: "Archivado",
-        personnel: ["ATLAS", "VANTA"],
-        summary: "Resumen documental autorizado.",
-        objectives: "Objetivos registrados en el expediente.",
-        results: "Resultados documentados y verificados.",
-        report: "Observaciones del informe AAR."
+        date: "No registrada",
+        status: "Pendiente de documentación",
+        personnel: ["Participación por verificar"],
+        summary: "Expediente asociado al registro de ATLAS. Información operativa pendiente de documentación.",
+        objectives: "Pendientes de documentación.",
+        results: "No registrados.",
+        report: "Pendiente de incorporar el informe correspondiente."
+    },
+    {
+        code: "REG-PEND-002",
+        title: "IRON VEIL",
+        category: "operacion",
+        date: "No registrada",
+        status: "Pendiente de documentación",
+        personnel: ["Participación por verificar"],
+        summary: "Expediente asociado al registro de ATLAS. Información operativa pendiente de documentación.",
+        objectives: "Pendientes de documentación.",
+        results: "No registrados.",
+        report: "Pendiente de incorporar el informe correspondiente."
+    },
+    {
+        code: "REG-PEND-003",
+        title: "NIGHTFALL",
+        category: "operacion",
+        date: "No registrada",
+        status: "Pendiente de documentación",
+        personnel: ["Participación por verificar"],
+        summary: "Expediente asociado al registro de ATLAS. Información operativa pendiente de documentación.",
+        objectives: "Pendientes de documentación.",
+        results: "No registrados.",
+        report: "Pendiente de incorporar el informe correspondiente."
+    },
+    {
+        code: "REG-PEND-004",
+        title: "BLACK HORIZON",
+        category: "operacion",
+        date: "No registrada",
+        status: "Pendiente de documentación",
+        personnel: ["Participación por verificar"],
+        summary: "Expediente asociado al registro de SPECTER. Información operativa pendiente de documentación.",
+        objectives: "Pendientes de documentación.",
+        results: "No registrados.",
+        report: "Pendiente de incorporar el informe correspondiente."
+    },
+    {
+        code: "REG-PEND-005",
+        title: "ARCHIVO NEGRO",
+        category: "operacion",
+        date: "No registrada",
+        status: "Pendiente de documentación",
+        personnel: ["Participación por verificar"],
+        summary: "Expediente asociado al registro de ZERO. Información operativa pendiente de documentación.",
+        objectives: "Pendientes de documentación.",
+        results: "No registrados.",
+        report: "Pendiente de incorporar el informe correspondiente."
     }
-    */
 ];
+
 
 const archiveSearch = document.getElementById("archiveSearch");
 const archiveCategory = document.getElementById("archiveCategory");
