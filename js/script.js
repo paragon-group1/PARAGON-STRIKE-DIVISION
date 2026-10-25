@@ -827,6 +827,7 @@ function setDiagnostic(id, status, label) {
     element.classList.add(`status-${status}`);
 }
 
+
 function runDiagnostics() {
     // JavaScript
     setDiagnostic(
@@ -843,8 +844,11 @@ function runDiagnostics() {
     );
 
     // Map
+    const mapElement = document.getElementById("paragonMap");
+
     const mapReady = Boolean(
         window.paragonMap &&
+        typeof window.paragonMap.invalidateSize === "function" &&
         mapElement &&
         mapElement._leaflet_id
     );
@@ -868,19 +872,6 @@ function runDiagnostics() {
             : "NO RECORDS"
     );
 }
-
-// Monitor network status.
-window.addEventListener("online", () => {
-    runDiagnostics();
-
-    window.paragonLogActivity("NETWORK CONNECTION RESTORED");
-});
-
-window.addEventListener("offline", () => {
-    runDiagnostics();
-
-    window.paragonLogActivity("NETWORK CONNECTION LOST");
-});
 
 /* =========================================================
    5. INTERFACE CLICK SOUND
