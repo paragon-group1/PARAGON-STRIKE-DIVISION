@@ -134,6 +134,17 @@
 
 
         <div class="sidebar-bottom">
+            <!-- OPERATIONS ARCHIVE -->
+<button
+    class="sidebar-button"
+    data-view="archive"
+    type="button">
+
+    <span class="sidebar-icon">▤</span>
+    <span class="sidebar-text">OPERATIONS ARCHIVE</span>
+    <span class="sidebar-indicator"></span>
+
+</button>
 
             <div class="sidebar-connection">
                 <span class="online-dot"></span>
@@ -657,6 +668,165 @@
 
     </main>
 
+
+<!-- ==================================================
+     MODULE 06 // OPERATIONS ARCHIVE
+=================================================== -->
+
+<main
+    class="command-main module-view"
+    id="archiveView"
+    data-module="archive"
+    hidden>
+
+    <section class="module-heading">
+
+        <span class="section-code">
+            PARAGON // DIRECTORATE OF OPERATIONS
+        </span>
+
+        <h1>OPERATIONS <span>ARCHIVE</span></h1>
+
+        <p>
+            Archivo documental de operaciones e informes
+            registrados por PARAGON STRIKE DIVISION.
+        </p>
+
+    </section>
+
+    <section class="module-panel archive-panel">
+
+        <div class="module-panel-header">
+            <div>
+                <span class="section-code">ARCHIVE // 01</span>
+                <h2>REGISTRO OPERATIVO</h2>
+            </div>
+
+            <span class="module-badge">READ ONLY</span>
+        </div>
+
+        <div class="archive-security-notice">
+            <span class="archive-lock">▣</span>
+            <div>
+                <strong>CONSULTA DOCUMENTAL</strong>
+                <p>
+                    Los expedientes de esta interfaz no disponen
+                    de controles de edición ni eliminación.
+                </p>
+            </div>
+        </div>
+
+        <div class="archive-toolbar">
+
+            <label class="archive-search">
+                <span>BUSCAR EXPEDIENTE</span>
+                <input
+                    id="archiveSearch"
+                    type="search"
+                    placeholder="Código, título o palabra clave..."
+                    autocomplete="off">
+            </label>
+
+            <label class="archive-filter">
+                <span>CLASIFICACIÓN</span>
+                <select id="archiveCategory">
+                    <option value="all">TODAS</option>
+                    <option value="operacion">OPERACIONES</option>
+                    <option value="informe">INFORMES AAR</option>
+                    <option value="documentacion">DOCUMENTACIÓN</option>
+                </select>
+            </label>
+
+        </div>
+
+        <div class="archive-results-heading">
+            <span>EXPEDIENTES DISPONIBLES</span>
+            <span id="archiveCount">0 REGISTROS</span>
+        </div>
+
+        <div
+            id="archiveRecords"
+            class="archive-records"
+            aria-live="polite">
+        </div>
+
+        <section
+            id="archiveDetail"
+            class="archive-detail"
+            hidden>
+
+            <div class="archive-detail-header">
+                <div>
+                    <span class="section-code">RECORD // DETAILS</span>
+                    <h2 id="archiveDetailTitle">EXPEDIENTE</h2>
+                </div>
+
+                <button
+                    id="archiveCloseDetail"
+                    class="module-action-button"
+                    type="button">
+                    CERRAR
+                </button>
+            </div>
+
+            <dl class="archive-metadata">
+                <div>
+                    <dt>CÓDIGO</dt>
+                    <dd id="archiveDetailCode">—</dd>
+                </div>
+
+                <div>
+                    <dt>FECHA</dt>
+                    <dd id="archiveDetailDate">—</dd>
+                </div>
+
+                <div>
+                    <dt>CLASIFICACIÓN</dt>
+                    <dd id="archiveDetailCategory">—</dd>
+                </div>
+
+                <div>
+                    <dt>ESTADO DOCUMENTAL</dt>
+                    <dd id="archiveDetailStatus">—</dd>
+                </div>
+
+                <div>
+                    <dt>PERSONAL ASIGNADO</dt>
+                    <dd id="archiveDetailPersonnel">—</dd>
+                </div>
+            </dl>
+
+            <div class="archive-report-section">
+                <h3>OBJETIVOS</h3>
+                <p id="archiveDetailObjectives">—</p>
+            </div>
+
+            <div class="archive-report-section">
+                <h3>RESULTADOS REGISTRADOS</h3>
+                <p id="archiveDetailResults">—</p>
+            </div>
+
+            <div class="archive-report-section">
+                <h3>INFORME / OBSERVACIONES</h3>
+                <p id="archiveDetailReport">—</p>
+            </div>
+
+            <div class="archive-detail-footer">
+                <span>PARAGON STRIKE DIVISION</span>
+                <span>DOCUMENTO DE CONSULTA</span>
+            </div>
+
+        </section>
+
+        <p class="module-note">
+            La interfaz no representa un sistema de auditoría
+            inalterable. La protección efectiva de los registros
+            requiere controles en el servidor.
+        </p>
+
+    </section>
+
+</main>
 
     <!-- ==================================================
          OPERATOR DATABASE MODAL
