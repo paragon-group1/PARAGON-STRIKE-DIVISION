@@ -952,3 +952,263 @@ if (document.body.classList.contains("command-page")) {
 /* =========================================================
    END OF PARAGON STRIKE DIVISION SCRIPT
 ========================================================= */
+
+/* =========================================================
+   PARAGON // OPERATIONS ARCHIVE
+   READ-ONLY RECORDS
+========================================================= */
+
+/*
+ * Los expedientes se incorporan únicamente al código.
+ * No existen controles de creación, edición o eliminación
+ * dentro de la interfaz.
+ *
+ * No añadir datos inventados. Registrar únicamente la
+ * información documental que haya sido proporcionada
+ * y verificada.
+ */
+
+const archiveEntries = [
+    /*
+    EJEMPLO DE ESTRUCTURA PARA UN EXPEDIENTE REAL:
+
+    {
+        code: "OPS-2026-001",
+        title: "Título del expediente",
+        category: "operacion",
+        date: "2026-01-15",
+        status: "Archivado",
+        personnel: ["ATLAS", "VANTA"],
+        summary: "Resumen documental autorizado.",
+        objectives: "Objetivos registrados en el expediente.",
+        results: "Resultados documentados y verificados.",
+        report: "Observaciones del informe AAR."
+    }
+    */
+];
+
+const archiveSearch = document.getElementById("archiveSearch");
+const archiveCategory = document.getElementById("archiveCategory");
+const archiveRecords = document.getElementById("archiveRecords");
+const archiveCount = document.getElementById("archiveCount");
+const archiveDetail = document.getElementById("archiveDetail");
+const archiveCloseDetail = document.getElementById("archiveCloseDetail");
+
+const archiveCategoryNames = {
+    operacion: "Operaciones",
+    informe: "Informes AAR",
+    documentacion: "Documentación"
+};
+
+function archiveText(value, fallback = "No consta en el expediente.") {
+    if (Array.isArray(value)) {
+        return value.length ? value.join(", ") : fallback;
+    }
+
+    if (typeof value === "string" && value.trim()) {
+        return value;
+    }
+
+    return fallback;
+}
+
+function archiveCreateElement(tag, className, value) {
+    const element = document.createElement(tag);
+
+    if (className) {
+        element.className = className;
+    }
+
+    if (value !== undefined) {
+        element.textContent = value;
+    }
+
+    return element;
+}
+
+function archiveRenderRecords() {
+    if (!archiveRecords || !archiveCount) return;
+
+    const searchTerm = (archiveSearch?.value || "")
+        .trim()
+        .toLocaleLowerCase("es");
+
+    const selectedCategory = archiveCategory?.value || "all";
+
+    const filteredEntries = archiveEntries.filter(entry => {
+        const categoryMatches =
+            selectedCategory === "all" ||
+            entry.category === selectedCategory;
+
+        const searchableText = [
+            entry.code,
+            entry.title,
+            entry.category,
+            entry.status,
+            entry.summary,
+            entry.report
+        ]
+            .map(value => String(value || ""))
+            .join(" ")
+            .toLocaleLowerCase("es");
+
+        return categoryMatches && searchableText.includes(searchTerm);
+    });
+
+    archiveRecords.replaceChildren();
+
+    archiveCount.textContent =
+        `${filteredEntries.length} REGISTRO${filteredEntries.length === 1 ? "" : "S"}`;
+
+    if (filteredEntries.length === 0) {
+        const emptyState = archiveCreateElement(
+            "div",
+            "archive-empty"
+        );
+
+        const heading = archiveCreateElement(
+            "strong",
+            "",
+            archiveEntries.length === 0
+                ? "ARCHIVO SIN EXPEDIENTES"
+                : "NO SE ENCONTRARON COINCIDENCIAS"
+        );
+
+        const message = archiveCreateElement(
+            "p",
+            "",
+            archiveEntries.length === 0
+                ? "Todavía no hay expedientes incorporados. Los registros aparecerán aquí cuando se añada documentación verificada."
+                : "Prueba con otro término o cambia la clasificación seleccionada."
+        );
+
+        emptyState.append(heading, message);
+        archiveRecords.appendChild(emptyState);
+        return;
+    }
+
+    filteredEntries.forEach(entry => {
+        const card = archiveCreateElement(
+            "button",
+            "archive-record-card"
+        );
+
+        card.type = "button";
+        card.setAttribute(
+            "aria-label",
+            `Consultar expediente ${archiveText(entry.code)}`
+        );
+
+        const top = archiveCreateElement("div", "archive-record-top");
+
+        top.append(
+            archiveCreateElement(
+                "span",
+                "archive-record-code",
+                archiveText(entry.code, "CÓDIGO PENDIENTE")
+            ),
+            archiveCreateElement(
+                "span",
+                "archive-record-category",
+                archiveCategoryNames[entry.category] || "Documento"
+            )
+        );
+
+        const title = archiveCreateElement(
+            "h3",
+            "",
+            archiveText(entry.title, "EXPEDIENTE SIN TÍTULO")
+        );
+
+        const summary = archiveCreateElement(
+            "p",
+            "",
+            archiveText(entry.summary)
+        );
+
+        const bottom = archiveCreateElement(
+            "div",
+            "archive-record-bottom"
+        );
+
+        bottom.append(
+            archiveCreateElement(
+                "span",
+                "",
+                archiveText(entry.date, "Fecha no registrada")
+            ),
+            archiveCreateElement(
+                "span",
+                "",
+                archiveText(entry.status, "Estado no registrado")
+            )
+        );
+
+        card.append(top, title, summary, bottom);
+
+        card.addEventListener("click", () => {
+            archiveOpenRecord(entry);
+        });
+
+        archiveRecords.appendChild(card);
+    });
+}
+
+function archiveOpenRecord(entry) {
+    if (!entry || !archiveDetail) return;
+
+    const details = {
+        archiveDetailTitle: archiveText(entry.title, "EXPEDIENTE"),
+        archiveDetailCode: archiveText(entry.code),
+        archiveDetailDate: archiveText(entry.date),
+        archiveDetailCategory:
+            archiveCategoryNames[entry.category] || "No clasificada",
+        archiveDetailStatus: archiveText(entry.status),
+        archiveDetailPersonnel: archiveText(entry.personnel),
+        archiveDetailObjectives: archiveText(entry.objectives),
+        archiveDetailResults: archiveText(entry.results),
+        archiveDetailReport: archiveText(entry.report)
+    };
+
+    Object.entries(details).forEach(([id, value]) => {
+        const element = document.getElementById(id);
+
+        if (element) {
+            element.textContent = value;
+        }
+    });
+
+    archiveDetail.hidden = false;
+    archiveDetail.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+    if (typeof window.paragonLogActivity === "function") {
+        window.paragonLogActivity(
+            `ARCHIVE RECORD CONSULTED // ${archiveText(entry.code)}`
+        );
+    }
+}
+
+function archiveHideDetail() {
+    if (archiveDetail) {
+        archiveDetail.hidden = true;
+    }
+}
+
+if (archiveSearch) {
+    archiveSearch.addEventListener("input", archiveRenderRecords);
+}
+
+if (archiveCategory) {
+    archiveCategory.addEventListener("change", archiveRenderRecords);
+}
+
+if (archiveCloseDetail) {
+    archiveCloseDetail.addEventListener("click", archiveHideDetail);
+}
+
+archiveRenderRecords();
+
+/* END // OPERATIONS ARCHIVE */
