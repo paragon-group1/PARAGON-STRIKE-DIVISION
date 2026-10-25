@@ -3487,3 +3487,312 @@ body {
 #paragonMap .leaflet-control-attribution a {
     color: #d3dddd;
 }
+
+/* ==================================================
+   PARAGON // OPERATIONS ARCHIVE
+   READ-ONLY DOCUMENT INTERFACE
+================================================== */
+
+.archive-panel {
+    margin-bottom: 32px;
+}
+
+.archive-security-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px;
+    margin-bottom: 24px;
+    background: rgba(143, 169, 154, 0.055);
+    border: 1px solid rgba(143, 169, 154, 0.24);
+}
+
+.archive-lock {
+    color: var(--green);
+    font-size: 23px;
+    line-height: 1;
+}
+
+.archive-security-notice strong,
+.archive-results-heading,
+.archive-detail-header h2 {
+    color: var(--white);
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 1px;
+}
+
+.archive-security-notice strong {
+    font-size: 11px;
+}
+
+.archive-security-notice p {
+    margin: 8px 0 0;
+    color: var(--gray);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.archive-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.archive-search,
+.archive-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-width: 0;
+}
+
+.archive-search > span,
+.archive-filter > span {
+    color: var(--gray);
+    font-family: "Orbitron", sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.archive-search input,
+.archive-filter select {
+    width: 100%;
+    min-height: 44px;
+    padding: 12px;
+    color: var(--white);
+    background: var(--dark);
+    border: 1px solid var(--gray-dark);
+    border-radius: 0;
+    font: inherit;
+    font-size: 13px;
+}
+
+.archive-search input:focus,
+.archive-filter select:focus {
+    outline: 1px solid var(--green);
+    border-color: var(--green);
+}
+
+.archive-filter select option {
+    color: var(--white);
+    background: var(--dark);
+}
+
+.archive-results-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 10px;
+}
+
+#archiveCount {
+    color: var(--gray);
+    text-align: right;
+}
+
+.archive-records {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    padding-top: 16px;
+}
+
+.archive-record-card {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    color: var(--white);
+    text-align: left;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.archive-record-card:hover,
+.archive-record-card:focus-visible {
+    background: var(--panel-light);
+    border-color: var(--gray);
+    outline: none;
+}
+
+.archive-record-top,
+.archive-record-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.archive-record-code {
+    color: var(--gray);
+    font-family: "Orbitron", sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.archive-record-category {
+    color: var(--green);
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.archive-record-card h3 {
+    margin: 18px 0 10px;
+    font-family: "Orbitron", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.archive-record-card p {
+    margin: 0 0 18px;
+    color: var(--gray);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.archive-record-bottom {
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    color: var(--gray);
+    font-size: 10px;
+}
+
+.archive-empty {
+    grid-column: 1 / -1;
+    padding: 36px 18px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px dashed var(--gray-dark);
+}
+
+.archive-empty strong {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--white);
+    font-family: "Orbitron", sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.archive-empty p {
+    margin: 0;
+    color: var(--gray);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.archive-detail {
+    margin-top: 28px;
+    padding: 22px;
+    background: var(--dark);
+    border: 1px solid var(--gray-dark);
+}
+
+.archive-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+}
+
+.archive-detail-header h2 {
+    margin: 10px 0 0;
+    font-size: 17px;
+    overflow-wrap: anywhere;
+}
+
+.archive-metadata {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin: 22px 0;
+}
+
+.archive-metadata div {
+    min-width: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+}
+
+.archive-metadata dt {
+    margin-bottom: 8px;
+    color: var(--gray);
+    font-family: "Orbitron", sans-serif;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.archive-metadata dd {
+    margin: 0;
+    color: var(--white);
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.archive-report-section {
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+}
+
+.archive-report-section h3 {
+    margin: 0 0 10px;
+    color: var(--gray);
+    font-family: "Orbitron", sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.archive-report-section p {
+    margin: 0;
+    color: var(--white);
+    font-size: 13px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.archive-detail-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 14px;
+    color: var(--gray);
+    border-top: 1px solid var(--line);
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 700px) {
+    .archive-toolbar,
+    .archive-records,
+    .archive-metadata {
+        grid-template-columns: 1fr;
+    }
+
+    .archive-detail {
+        padding: 16px;
+    }
+
+    .archive-detail-header {
+        align-items: flex-start;
+    }
+
+    .archive-detail-header h2 {
+        font-size: 14px;
+    }
+
+    .archive-record-top,
+    .archive-record-bottom {
+        align-items: flex-start;
+    }
+}
